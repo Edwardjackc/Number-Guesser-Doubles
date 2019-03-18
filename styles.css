@@ -1,0 +1,46 @@
+/*---------- Body ------------------*/
+*{
+  border: 1px solid red;
+  box-sizing: border-box;
+}
+
+body{
+
+}
+
+/*---------- Header ----------------*/
+header{
+
+}
+
+/*---------- Aritcle ---------------*/
+article{
+
+}
+
+/*---------- Aside -----------------*/
+aside{
+
+}
+
+/*---------- Media Queries ---------*/
+
+/*---- Large Tablet/Small Comp -----*/
+@media screen and (max-width: 1024px){
+
+}
+
+/*---- Typical Tablet Size ---------*/
+@media screen and (max-width: 768px){
+
+}
+
+/*---- Large Phones ----------------*/
+@media screen and (max-width: 440px){
+
+}
+
+/*---- Small Screens ---------------*/
+@media screen and (max-width: 320px){
+
+}
