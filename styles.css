@@ -5,22 +5,57 @@
 }
 
 body{
-
+  font-family: 'Open Sans', sans-serif;
 }
 
 /*---------- Header ----------------*/
 header{
-
+  background-color:#404041;
+  color:#dd1972;
 }
 
+h1{
+  font-weight:800;
+}
+
+h1 span{
+  font-weight:400;
+}
+
+sub{
+  color:#ffffff;
+}
 /*---------- Aritcle ---------------*/
 article{
-
+  background-color:#f7f7f7;
+  color:#404041;
+  display:inline-block;
+  width:50%;
 }
 
+button{
+  background-color:#6e6e6e;
+  border-radius:50px;
+  color:#ffffff;
+}
+
+label{
+  display:block;
+  font-size:.8em;
+}
+
+input{
+  padding:5px; 
+}
+
+form{
+  background-color:#ffffff;
+  border:1px solid #d0d2d3;
+  margin:10px 20px;
+}
 /*---------- Aside -----------------*/
 aside{
-
+  background-color:
 }
 
 /*---------- Media Queries ---------*/
