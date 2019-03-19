@@ -5,20 +5,21 @@
   <title>Number Guesser Doubles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="normalize.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <header>
   <h1>Number<span>Guesser</span></h1>
-  <subtitle>Ultimate Challenger Edition</subtitle>
+  <sub>Ultimate Challenger Edition</sub>
 </header>
 <article>
 	<form>
 		<h3>Set Range</h3>
     <label>Min Range</label>
-    <input type="number" name="" class="input-range">
+    <input type="number" name="" class="input-range" id="input-minrange" maxlength="3">
     <label>Max Range</label>
-    <input type="number" name="" class="input-range">
+    <input type="number" name="" class="input-range" id="input-maxrange" maxlength="3">
     <button class="button-update">Update</button>
   </form>
   <form>
@@ -64,7 +65,7 @@
       <hr>
       <div class="card-output-results">
         <h2 class="winner"> -- </h2>
-        <subtitle class="card-style-winner">Winner</subtitle>
+        <sub class="card-style-winner">Winner</sub>
       </div>
       <hr>
       <div class="card-bottom-wrapper">
