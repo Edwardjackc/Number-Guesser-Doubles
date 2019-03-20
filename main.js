@@ -25,16 +25,18 @@ var btnClear = document.querySelector('#btn-clear');
 /*---------- Event Listeners -----------*/
 btnUpdateRange.addEventListener('click', updateRange);
 btnSubmit.addEventListener('click', playGame);
+//btnReset.addEventListener('click', resetGame);
+//btnClear.addEventListener('click', clearGame); 
 
 
 /*---------- Functions -----------------*/
-function updateRange(e){
+function updateRange(e) {
   e.preventDefault();
   outputRangeMin.innerText = inputRangeMin.value;
   outputRangeMax.innerText = inputRangeMax.value;
-}
+};
 
-function playGame(e){
+function playGame(e) {
   e.preventDefault();
   checkValidInputCh1();
   checkValidInputCh2();
@@ -44,37 +46,49 @@ function playGame(e){
   outputGuessCh1.innerText = inputGuessCh1.value;
   outputNameCh2.innerText = inputNameCh2.value;
   outputGuessCh2.innerText = inputGuessCh2.value;
-} 
+}; 
+
+//function resetGame(e) {
+//   e.preventDefault();
+//   resetInputCh1();
+//   resetInputCh2();
+//   resetCurrentGuess1();
+//   resetCurrentGuess2();
+// }
+
+
 // if name or guess is empty string apply error classfrom css and end function 
-function checkValidInputCh1(){
+function checkValidInputCh1() {
   if (inputNameCh1.value === '') {
     inputNameCh1.classList.add('error');
   } else {
     inputNameCh1.classList.remove('error');
   }  
-}
+};
 
-function checkValidInputCh2(){
+function checkValidInputCh2() {
   if (inputNameCh2.value === '') {
     inputNameCh2.classList.add('error');
   } else {
     inputNameCh2.classList.remove('error');
   }
-}
+};
 
-function checkValidInputGuess1(){
+function checkValidInputGuess1() {
   if (inputGuessCh1.value === '') {
     inputGuessCh1.classList.add('error');
   } else {
     inputGuessCh1.classList.remove('error');
   }  
-}
+};
 
-
-function checkValidInputGuess2(){
+function checkValidInputGuess2() {
   if (inputGuessCh2.value === '') {
     inputGuessCh2.classList.add('error');
   } else {
     inputGuessCh2.classList.remove('error');
   }  
-}
+};
+
+
+
