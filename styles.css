@@ -1,13 +1,17 @@
 /*---------- Body ------------------*/
 *{
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   box-sizing: border-box;
+  margin:0;
 }
+
 
 body{
   font-family: 'Open Sans', sans-serif;
 }
-
+main{
+  display:flex;
+}
 /*---------- Header ----------------*/
 header{
   background-color:#404041;
@@ -16,15 +20,18 @@ header{
 
 h1{
   font-weight:800;
+  text-align: center;
 }
 
 h1 span{
   font-weight:400;
 }
 
-sub{
+.sub{
   color:#ffffff;
+  text-align:center;
 }
+
 /*---------- Aritcle ---------------*/
 article{
   background-color:#f7f7f7;
@@ -58,6 +65,25 @@ form{
 
 }
 
+.name-input-wrapper1{
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+}
+
+.name-input-wrapper{
+    display:flex;
+  
+}
+
+.name-input-challengers{
+  border:1px solid lightgrey;
+}
+
+.error{
+  border:2px solid pink;
+}
+
 #range-min,
 #range-max{
   font-weight:700;
@@ -87,7 +113,7 @@ form{
 }
 /*---------- Aside -----------------*/
 aside{
-  background-color:#6E6E6E;
+  background-color:#d0d2d3;
   color:#404041;
   display:flex;
   flex-direction:column;
@@ -117,6 +143,21 @@ aside{
   font-size:.8em;
 }
 
+.card-output-results{
+  text-align:center;
+
+}
+
+.card-style-winner{
+  text-transform:uppercase;
+  font-size:1.5em;
+}
+
+.card-bottom-wrapper{
+  display:flex;
+  justify-content:space-between;
+  margin: 0px 15px;
+}
 
 /*---------- Media Queries ---------*/
 
