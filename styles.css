@@ -12,7 +12,11 @@ body{
 main{
   display:flex;
 }
-p {
+
+p,
+h2,
+h3,
+h4{
   margin: 0;
 }
 /*---------- Header ----------------*/
@@ -71,11 +75,6 @@ form{
   border:1px solid #d0d2d3;
   margin:10px 20px;
   padding: 5px;
-}
-
-h3,
-h4 {
-  margin: 0;
 }
 
 
@@ -161,6 +160,10 @@ hr{
   margin:10px 20px;
   border: 1px solid #6e6e6e;
   padding: 10px;
+}
+
+.winner{
+  text-transform: uppercase;
 }
 
 .versus-challenger{

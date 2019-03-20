@@ -6,6 +6,7 @@ var inputNameCh1 = document.querySelector('#input-name-challenger1');
 var inputNameCh2 = document.querySelector('#input-name-challenger2');
 var inputGuessCh1 = document.querySelector('#input-guess-challenger1');
 var inputGuessCh2 = document.querySelector('#input-guess-challenger2');
+var asideColumn =document.querySelector('aside');
 /*--------- Output Var -----------------*/
 var outputRangeMin= document.querySelector('#range-min');
 var outputRangeMax= document.querySelector('#range-max');
@@ -30,6 +31,13 @@ btnSubmit.addEventListener('click', playGame);
 
 
 /*---------- Functions -----------------*/
+function getRandom(min, max){
+  max = inputRangeMin.value;
+  min = inputRangeMax.value;
+  return Math.floor(Math.random() * (max-min+1) ) + min;
+}
+
+console.log()
 function updateRange(e) {
   e.preventDefault();
   outputRangeMin.innerText = inputRangeMin.value;
@@ -38,16 +46,45 @@ function updateRange(e) {
 
 function playGame(e) {
   e.preventDefault();
-  checkValidInputCh1();
-  checkValidInputCh2();
-  checkValidInputGuess1();
-  checkValidInputGuess2();
+  checkAllInputs();
+  displayNames();
+  appendCard();
+}; 
+
+function displayNames(){
   outputNameCh1.innerText = inputNameCh1.value;
   outputGuessCh1.innerText = inputGuessCh1.value;
   outputNameCh2.innerText = inputNameCh2.value;
   outputGuessCh2.innerText = inputGuessCh2.value;
-}; 
+}
 
+function checkAllInputs(){
+  checkValidInputCh1();
+  checkValidInputCh2();
+  checkValidInputGuess1();
+  checkValidInputGuess2();
+}
+
+function appendCard(){
+  asideColumn.innerHTML += `<section class="card-winner">
+      <div class="versus-challenger">
+        <p class="card-output-ch1">${inputNameCh1.value}</p>
+        <p class="vs-style">VS</p>
+        <p class="card-output-ch2">${inputNameCh2.value}</p>
+      </div>
+      <hr>
+      <div class="card-output-results">
+        <h2 class="winner">${inputNameCh1.value}</h2>
+        <p class="card-style-winner">Winner</p>
+      </div>
+      <hr>
+      <div class="card-bottom-wrapper">
+        <p><span class="card-num-guess"> -- </span>Guesses</p>
+        <p><span class="card-min">- -- </span>Minutes</p>
+        <p>X</p>
+      </div>
+    </section>`
+}
 //function resetGame(e) {
 //   e.preventDefault();
 //   resetInputCh1();
@@ -92,3 +129,4 @@ function checkValidInputGuess2() {
 
 
 
+window.load(getRandom())
