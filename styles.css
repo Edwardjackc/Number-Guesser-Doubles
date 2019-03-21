@@ -44,6 +44,7 @@ h1 span{
   color:#ffffff;
   text-align:center;
   margin: 0;
+  font-size: .8em;
 }
 
 /*---------- Aritcle ---------------*/
@@ -84,24 +85,17 @@ form{
   margin-left: auto;
 }
 
-
-.btn-game{
-
+.range-flex{
+  display: flex;
 }
 
-.name-input-wrapper1{
-  display:flex;
-  flex-direction:column;
-  justify-content: flex-start;
+.input-range{
+  width: 80%
 }
 
-.name-input-wrapper{
-    display:flex;
-  
-}
-
-.name-input-challengers{
-  border:1px solid lightgrey;
+#btn-update{
+  height: 20px;
+  align-self: flex-end;
 }
 
 .error{
@@ -112,6 +106,24 @@ form{
 #range-max{
   font-weight:700;
   text-decoration:underline;
+}
+
+.name-input-wrapper{
+  display:inline-block;
+  width: 60%;
+}
+
+.guess-input-wrapper{
+  display: inline-block;
+  width:30%;
+}
+
+.name-input-challengers{
+  border: 1px solid lightgrey;
+  width: 220px;
+}
+.guesses-challenger{
+  width: 145px;
 }
 
 .btn-wrapper{
@@ -138,6 +150,7 @@ form{
 
 .latest-guess-challenger1{
   border-right: 1px solid lightgrey;
+  padding-right: 5%;
 }
 
 .guess-current-style{
