@@ -23,43 +23,49 @@ var btnReset = document.querySelector('#btn-reset');
 var btnClear = document.querySelector('#btn-clear');
 
 /*---------- Global Variables ----------*/
-var min = inputRangeMin.value || 1;
-var max = inputRangeMax.value || 100;
 var outputWinner;
-var randomNum = Math.floor(Math.random()*(+max - +min)) + +min;
-console.log(randomNum);
-
+var randomNum;
 
 /*---------- Event Listeners -----------*/
 btnUpdateRange.addEventListener('click', updateRange);
 btnSubmit.addEventListener('click', playGame);
-//btnReset.addEventListener('click', resetGame);
-//btnClear.addEventListener('click', clearGame); 
+//btnReset.addEventListener('click', resetGame); 
+//btnClear.addEventListener('click', clearGame);
 
 
 /*---------- Functions -----------------*/
+function makeRandomNumber(min, max) {
+  min = parseInt(inputRangeMin.value) || 1;
+  max = parseInt(inputRangeMax.value)|| 100;
+  return randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 
 function checkForCh1() {
   if(inputGuessCh1.value == randomNum) { 
-     outputWinner = inputNameCh1.value;
-     outputHighLow1.innerText = 'BOOM';
-     appendCard();
+      outputWinner = inputNameCh1.value;
+      outputHighLow1.innerText = 'BOOM';
+      makeRandomNumber();
+      appendCard();
+      console.log(randomNum);
   } else if (inputGuessCh1.value < randomNum) {
-    outputHighLow1.innerText = 'TO LOW';
+      outputHighLow1.innerText = 'that\'s too low';
   } else { 
-    outputHighLow1.innerText = 'TO HIGH';
+      outputHighLow1.innerText = 'that\'s too high';
     }
 }
  
  function checkForCh2() {
   if(inputGuessCh2.value == randomNum) { 
-     outputWinner = inputNameCh2.value;
-     outputHighLow2.innerText = 'BOOM';
-     appendCard();
+      outputWinner = inputNameCh2.value;
+      outputHighLow2.innerText = 'BOOM';
+      makeRandomNumber();
+      appendCard();
+      console.log(randomNum);
   } else if (inputGuessCh2.value < randomNum) {
-    outputHighLow2.innerText = 'TO LOW';
+    outputHighLow2.innerText = 'that\'s too low';
   } else { 
-    outputHighLow2.innerText = 'TO HIGH';
+    outputHighLow2.innerText = 'that\'s too high';
     }
 }
 
@@ -68,11 +74,6 @@ function checkForCh1() {
     checkForCh2();
   }
 
-// function getRandom(min, max){
-//   max = inputRangeMin.value;
-//   min = inputRangeMax.value;
-//   return Math.floor(Math.random() * (max-min+1) ) + min;
-// }
 
 function updateRange(e) {
   e.preventDefault();
@@ -85,7 +86,6 @@ function playGame(e) {
   checkAllInputs();
   displayNames();
   checkWinner();
-  randomNum;
 }; 
 
 function displayNames(){
@@ -166,4 +166,5 @@ function checkValidInputGuess2() {
 
 
 
-// window.load(getRandom())
+window.onload = makeRandomNumber();
+console.log(randomNum);
