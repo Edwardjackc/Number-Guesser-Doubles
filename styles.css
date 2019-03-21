@@ -1,3 +1,6 @@
+html{
+  min-height: 100%:;
+}
 /*---------- Body ------------------*/
 *{
   /*border: 1px solid red;*/
@@ -8,6 +11,7 @@
 body{
   font-family: 'Open Sans', sans-serif;
   margin:0;
+  height: 100vh;
 }
 main{
   display:flex;
@@ -49,6 +53,7 @@ article{
   display:inline-block;
   width:50%;
   border-right: 1px solid darkgray;
+  height: 100vh;
 }
 
 button{
@@ -74,7 +79,7 @@ form{
   background-color:#ffffff;
   border:1px solid #d0d2d3;
   margin:10px 20px;
-  padding: 5px;
+  padding: 10px;
   max-width: 400px;
   margin-left: auto;
 }
@@ -119,7 +124,7 @@ form{
   background-color:#ffffff;
   margin: 10px 20px;
   border: 1px solid #d0d2d3;
-  padding: 5px;
+  padding: 10px;
   max-width: 400px;
   margin-left: auto;
 }
@@ -129,6 +134,10 @@ form{
   justify-content: space-around;
   text-align: center;
   flex-direction: row;
+}
+
+.latest-guess-challenger1{
+  border-right: 1px solid lightgrey;
 }
 
 .guess-current-style{
