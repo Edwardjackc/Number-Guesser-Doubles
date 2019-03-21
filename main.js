@@ -22,12 +22,13 @@ var btnSubmit = document.querySelector('#btn-submit');
 var btnReset = document.querySelector('#btn-reset');
 var btnClear = document.querySelector('#btn-clear');
 
-/*---------- Global Variables ----------*/
-var min = inputRangeMin.value || 1;
-var max = inputRangeMax.value || 100;
-var outputWinner;
-var randomNum = Math.floor(Math.random()*(+max - +min)) + +min;
-console.log(randomNum);
+// /*---------- Global Variables ----------*/
+ // var min = inputRangeMin.value || 1;
+ // var max = inputRangeMax.value || 100;
+ var outputWinner;
+// var randomNum = Math.floor(Math.random()*(+max - +min)) + +min;
+// console.log(randomNum);
+var randomNum;
 
 
 /*---------- Event Listeners -----------*/
@@ -38,12 +39,21 @@ btnSubmit.addEventListener('click', playGame);
 
 
 /*---------- Functions -----------------*/
+function makeRandomNum() {
+  var min = inputRangeMin.value || 1;
+  var max = inputRangeMax.value || 100;
+  return randomNum = Math.floor(Math.random()*(+max - +min)) + +min;
+} 
+
+console.log(makeRandomNum());
+// console.log(randomNum);
 
 function checkForCh1() {
   if(inputGuessCh1.value == randomNum) { 
      outputWinner = inputNameCh1.value;
      outputHighLow1.innerText = 'BOOM';
      appendCard();
+     // makeRandomNum();
   } else if (inputGuessCh1.value < randomNum) {
     outputHighLow1.innerText = 'TO LOW';
   } else { 
@@ -51,17 +61,34 @@ function checkForCh1() {
     }
 }
  
- function checkForCh2() {
-  if(inputGuessCh2.value == randomNum) { 
-     outputWinner = inputNameCh2.value;
-     outputHighLow2.innerText = 'BOOM';
-     appendCard();
-  } else if (inputGuessCh2.value < randomNum) {
-    outputHighLow2.innerText = 'TO LOW';
-  } else { 
-    outputHighLow2.innerText = 'TO HIGH';
+//  function checkForCh2() {
+//   if(inputGuessCh2.value == randomNum) { 
+//      outputWinner = inputNameCh2.value;
+//      outputHighLow2.innerText = 'BOOM';
+//      appendCard();
+//      makeRandomNum(randomNum);
+//   } else if (inputGuessCh2.value < randomNum) {
+//     outputHighLow2.innerText = 'TO LOW';
+//   } else { 
+//     outputHighLow2.innerText = 'TO HIGH';
+//     }
+// }
+
+  function checkForCh2() {
+    if(parseInt(inputGuessCh2.value) < randomNum) {
+      outputHighLow2.innerText = 'TO LOW';
+      console.log(parseInt(inputGuessCh2.value))
+    } else if(parseInt(inputGuessCh2.value) > randomNum) {
+      outputHighLow2.innerText = 'TO HIGH';
+      console.log(parseInt(inputGuessCh2.value))
+    } else if (parseInt(inputGuessCh2.value) === randomNum){
+      outputWinner = inputNameCh2.value;
+      outputHighLow2.innerText = 'Boom';
+      appendCard();
+      // makeRandomNum();
     }
-}
+   }
+
 
   function checkWinner() {
     checkForCh1();
@@ -85,7 +112,7 @@ function playGame(e) {
   checkAllInputs();
   displayNames();
   checkWinner();
-  randomNum;
+ //randomNum;
 }; 
 
 function displayNames(){
@@ -166,4 +193,4 @@ function checkValidInputGuess2() {
 
 
 
-// window.load(getRandom())
+window.onload = makeRandomNum();
