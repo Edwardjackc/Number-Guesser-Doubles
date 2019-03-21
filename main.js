@@ -79,6 +79,8 @@ function updateRange(e) {
   e.preventDefault();
   outputRangeMin.innerText = inputRangeMin.value;
   outputRangeMax.innerText = inputRangeMax.value;
+  makeRandomNumber();
+  console.log(randomNum);
 };
 
 function playGame(e) {
