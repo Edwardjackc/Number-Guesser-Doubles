@@ -6,7 +6,12 @@ var inputNameCh1 = document.querySelector('#input-name-challenger1');
 var inputNameCh2 = document.querySelector('#input-name-challenger2');
 var inputGuessCh1 = document.querySelector('#input-guess-challenger1');
 var inputGuessCh2 = document.querySelector('#input-guess-challenger2');
-var asideColumn =document.querySelector('aside');
+var asideColumn = document.querySelector('aside');
+var formInputChallengers = document.querySelectorAll('.input-form-clear');
+// var inputNameRegEx = document.querySelector('.name-input-challengers')
+// var inputNumRegEx = document.querySelector('.guesses-challenger')
+
+
 /*--------- Output Var -----------------*/
 var outputRangeMin= document.querySelector('#range-min');
 var outputRangeMax= document.querySelector('#range-max');
@@ -22,72 +27,108 @@ var btnSubmit = document.querySelector('#btn-submit');
 var btnReset = document.querySelector('#btn-reset');
 var btnClear = document.querySelector('#btn-clear');
 
-// /*---------- Global Variables ----------*/
- // var min = inputRangeMin.value || 1;
- // var max = inputRangeMax.value || 100;
- var outputWinner;
-// var randomNum = Math.floor(Math.random()*(+max - +min)) + +min;
-// console.log(randomNum);
-var randomNum;
-
 
 /*---------- Event Listeners -----------*/
 btnUpdateRange.addEventListener('click', updateRange);
 btnSubmit.addEventListener('click', playGame);
-//btnReset.addEventListener('click', resetGame);
-//btnClear.addEventListener('click', clearGame); 
+// inputNameRegEx.addEventListener('keydown', checkNameRegEx);
+// inputNumRegex.addEventListener('keydown', checkRegExNum);
+// btnReset.addEventListener('click', resetGame);
+btnClear.addEventListener('click', clearForm);
 
 
 /*---------- Functions -----------------*/
-function makeRandomNum() {
-  var min = inputRangeMin.value || 1;
-  var max = inputRangeMax.value || 100;
-  return randomNum = Math.floor(Math.random()*(+max - +min)) + +min;
+
+// function resetBtnDisable() {
+//   if checkAllInputs = '' + ("btnReset").disabled = true;
+// } else checkAllInputs = innnerText.value() + (btn)
+
+
+function resetBtnDisable() {
+ if (allInputs()("allInputs").value==="") { 
+            document.getElementById('btnReset').disabled = true; 
+        } else { 
+            document.getElementById('button').disabled = false;
+  }
+}
+
+function allInputs() {
+inputRangeMin();
+inputRangeMax();
+inputNameCh1();
+inputNameCh2();
+inputGuessCh1();
+inputGuessCh2();
+console.log(allInputs);
+}
+
+
+function resetForm(e) { 
+  e.preventDefault();
+  clearForm();
+  makeRandomNumber();
+  for (var i = 0; i < formInputChallengers.length ; i++ ) {
+ formInputChallengers[i].reset();
+  }
+}
+
+function clearForm(e) {
+  e.preventDefault();
+  for (var i = 0; i < formInputChallengers.length ; i++ ) {
+ formInputChallengers[i].reset();
+ }
 } 
 
-console.log(makeRandomNum());
-// console.log(randomNum);
 
-function checkForCh1() {
-  if(inputGuessCh1.value == randomNum) { 
-     outputWinner = inputNameCh1.value;
-     outputHighLow1.innerText = 'BOOM';
-     appendCard();
-     // makeRandomNum();
-  } else if (inputGuessCh1.value < randomNum) {
-    outputHighLow1.innerText = 'TO LOW';
-  } else { 
-    outputHighLow1.innerText = 'TO HIGH';
-    }
+function makeRandomNumber(min, max) {
+  min = parseInt(inputRangeMin.value) || 1;
+  max = parseInt(inputRangeMax.value)|| 100;
+  return randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 }
- 
-//  function checkForCh2() {
-//   if(inputGuessCh2.value == randomNum) { 
-//      outputWinner = inputNameCh2.value;
-//      outputHighLow2.innerText = 'BOOM';
-//      appendCard();
-//      makeRandomNum(randomNum);
-//   } else if (inputGuessCh2.value < randomNum) {
-//     outputHighLow2.innerText = 'TO LOW';
-//   } else { 
-//     outputHighLow2.innerText = 'TO HIGH';
-//     }
+
+// function checkNameRegEx() {
+//   if ( inputNameCh1.value === /^[a-z0-9]+$/i) && inputNameCh2.value === /^[a-z0-9]+$/i)
+// }
+//    else { 
+//  checkAllInputs()
 // }
 
-  function checkForCh2() {
-    if(parseInt(inputGuessCh2.value) < randomNum) {
-      outputHighLow2.innerText = 'TO LOW';
-      console.log(parseInt(inputGuessCh2.value))
-    } else if(parseInt(inputGuessCh2.value) > randomNum) {
-      outputHighLow2.innerText = 'TO HIGH';
-      console.log(parseInt(inputGuessCh2.value))
-    } else if (parseInt(inputGuessCh2.value) === randomNum){
-      outputWinner = inputNameCh2.value;
-      outputHighLow2.innerText = 'Boom';
+// function checkRegExNum {
+//   if (CH1 inputguess1 ===  && Ch2 inputguess2)
+// } else {
+//   checkAllInputs()
+// }
+
+
+
+function checkForCh1() {
+   ( inputNameCh1.value === /^[a-zA-Z0-9]+$/i)
+  if(inputGuessCh1.value == randomNum) { 
+      outputWinner = inputNameCh1.value;
+      outputHighLow1.innerText = 'BOOM';
+      makeRandomNumber();
       appendCard();
-      // makeRandomNum();
+      console.log(randomNum);
+  } else if (inputGuessCh1.value < randomNum) {
+      outputHighLow1.innerText = 'that\'s too low';
+  } else { 
+      outputHighLow1.innerText = 'that\'s too high';
+    } 
+}
+ 
+ function checkForCh2() {
+  if(inputGuessCh2.value == randomNum) { 
+      outputWinner = inputNameCh2.value;
+      outputHighLow2.innerText = 'BOOM';
+      makeRandomNumber();
+      appendCard();
+      console.log(randomNum);
+  } else if (inputGuessCh2.value < randomNum) {
+    outputHighLow2.innerText = 'that\'s too low';
+  } else { 
+    outputHighLow2.innerText = 'that\'s too high';
     }
-   }
+}
 
 
   function checkWinner() {
@@ -95,16 +136,13 @@ function checkForCh1() {
     checkForCh2();
   }
 
-// function getRandom(min, max){
-//   max = inputRangeMin.value;
-//   min = inputRangeMax.value;
-//   return Math.floor(Math.random() * (max-min+1) ) + min;
-// }
 
 function updateRange(e) {
   e.preventDefault();
   outputRangeMin.innerText = inputRangeMin.value;
   outputRangeMax.innerText = inputRangeMax.value;
+  makeRandomNumber();
+  console.log(randomNum);
 };
 
 function playGame(e) {
@@ -112,7 +150,7 @@ function playGame(e) {
   checkAllInputs();
   displayNames();
   checkWinner();
- //randomNum;
+
 }; 
 
 function displayNames(){
@@ -149,13 +187,7 @@ function appendCard(){
       </div>
     </section>`
 }
-//function resetGame(e) {
-//   e.preventDefault();
-//   resetInputCh1();
-//   resetInputCh2();
-//   resetCurrentGuess1();
-//   resetCurrentGuess2();
-// }
+
 
 
 // if name or guess is empty string apply error classfrom css and end function 
@@ -172,7 +204,7 @@ function checkValidInputCh2() {
     inputNameCh2.classList.add('error');
   } else {
     inputNameCh2.classList.remove('error');
-  }
+  } 
 };
 
 function checkValidInputGuess1() {
@@ -193,4 +225,6 @@ function checkValidInputGuess2() {
 
 
 
-window.onload = makeRandomNum();
+
+window.onload = makeRandomNumber();
+console.log(randomNum);
