@@ -52,17 +52,6 @@ function resetBtnDisable() {
   }
 }
 
-function allInputs() {
-inputRangeMin();
-inputRangeMax();
-inputNameCh1();
-inputNameCh2();
-inputGuessCh1();
-inputGuessCh2();
-console.log(allInputs);
-}
-
-
 function resetForm(e) { 
   e.preventDefault();
   clearForm();
