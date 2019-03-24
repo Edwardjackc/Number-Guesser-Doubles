@@ -45,6 +45,7 @@ inputGuessCh1.addEventListener('keydown', validateRange)
 inputGuessCh2.addEventListener('keydown', validateRange)
 inputRangeMax.addEventListener('keydown', validateRange)
 inputRangeMin.addEventListener('keydown', validateRange)
+asideColumn.addEventListener('click', deleteCard)
 
 
 /*---------- Functions -----------------*/
@@ -131,6 +132,14 @@ function displayNames(){
   outputGuessCh2.innerText = inputGuessCh2.value;
 }
 
+function addError(input) {
+    input.classList.add('error');
+  }  
+
+function removeError(input){
+    input.classList.remove('error');
+}
+
 function appendCard(){
   asideColumn.innerHTML += `<section class="card-winner">
       <div class="versus-challenger">
@@ -147,7 +156,7 @@ function appendCard(){
       <div class="card-bottom-wrapper">
         <p><span class="card-num-guess">${guessCounter} </span>Guesses</p>
         <p><span class="card-min">- -- </span>Minutes</p>
-        <i class="fas fa-times-circle"></i>
+        <i class="fas fa-times-circle delete"></i>
       </div>
     </section>`
       makeRandomNumber();
@@ -155,16 +164,9 @@ function appendCard(){
 }
 
 function deleteCard(e){
-  e.preventDefault();
-  btn.btnHideCard.classList.add('hidden')
-}
-
-function addError(input) {
-    input.classList.add('error');
-  }  
-
-function removeError(input){
-    input.classList.remove('error');
+  if (e.target.classList.contains('delete')){
+    e.target.closest('section').remove();
+  }
 }
 
 window.onload = makeRandomNumber();
