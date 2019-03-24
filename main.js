@@ -31,7 +31,7 @@ var formChallenger = document.querySelector('#form-challenger');
 var outputWinner;
 var randomNum;
 var timeToGuess;
-var guessCounter;
+var guessCounter = 1;
 
 /*---------- Event Listeners -----------*/
 btnUpdateRange.addEventListener('click', updateRange);
@@ -41,6 +41,10 @@ btnSubmit.addEventListener('click', playGame);
 // btnReset.addEventListener('click', resetGame); 
 btnClear.addEventListener('click', resetChallengerForm);
 // btnClear.addEventListener('keydown', toggleClear);
+inputGuessCh1.addEventListener('keydown', validateRange)
+inputGuessCh2.addEventListener('keydown', validateRange)
+inputRangeMax.addEventListener('keydown', validateRange)
+inputRangeMin.addEventListener('keydown', validateRange)
 
 
 /*---------- Functions -----------------*/
@@ -50,6 +54,23 @@ function makeRandomNumber(min, max) {
   return randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function validateRange(e) {
+  var regex = /[\t\n\b0-9]/;
+  if (e.key === 'Backspace' || regex.test(e.key)) {
+  } else {
+    e.preventDefault();
+  }
+}
+
+function updateRange(e) {
+  e.preventDefault();
+  outputRangeMin.innerText = inputRangeMin.value;
+  outputRangeMax.innerText = inputRangeMax.value;
+  makeRandomNumber();
+  console.log(randomNum);
+  formUpdateRange.reset();
+};
+
 function checkGuess(inputGuess) {
   //determines which user we're checking
   let outputHighLow = outputHighLow1;
@@ -57,15 +78,20 @@ function checkGuess(inputGuess) {
   if(inputGuess.id === inputGuessCh2.id){
     outputHighLow = outputHighLow2;
     inputName = inputNameCh2;
-  }
+  } 
   if(inputGuess.value == randomNum) { 
     winner(outputHighLow, inputName)
+    guessCounter = 0;
   } else if (inputGuessCh2.value < randomNum) {
     tooLow(outputHighLow)
+    guessCounter ++;
   } else { 
     tooHigh(outputHighLow)
+    guessCounter ++;
     }
 }
+
+
 
 function tooLow(outputHighLow){
   outputHighLow.innerText = 'that\'s too low';
@@ -84,14 +110,7 @@ function winner(outputHighLow, inputName){
 //   if(pareseInt(inputGuessCh1.value) || parseInt(inputGuessCh2.value) > || <)
 // }
 
-function updateRange(e) {
-  e.preventDefault();
-  outputRangeMin.innerText = inputRangeMin.value;
-  outputRangeMax.innerText = inputRangeMax.value;
-  makeRandomNumber();
-  console.log(randomNum);
-  formUpdateRange.reset();
-};
+
 
 function resetChallengerForm(e){
   e.preventDefault();
@@ -126,7 +145,7 @@ function appendCard(){
       </div>
       <hr>
       <div class="card-bottom-wrapper">
-        <p><span class="card-num-guess"> -- </span>Guesses</p>
+        <p><span class="card-num-guess">${guessCounter} </span>Guesses</p>
         <p><span class="card-min">- -- </span>Minutes</p>
         <i class="fas fa-times-circle"></i>
       </div>
