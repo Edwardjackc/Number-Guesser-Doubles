@@ -5,6 +5,7 @@
   <title>Number Guesser Doubles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -14,21 +15,21 @@
 </header>
 <main>
 <article>
-	<form>
+	<form id="form-range">
 		<h3>Set Range</h3>
     <div class="range-flex">
       <div class="input-range-wrapper">
         <label for="input-minrange">Min Range</label>
-        <input type="number" name="" class="input-range" id="input-minrange" maxlength="3">
+        <input type="number" name="" class="input-range" type="tel" minlength="1" maxlength="3" id="input-minrange">
       </div>
       <div class="input-range-wrapper">
         <label for="input-maxrange">Max Range</label>
-        <input type="number" name="" class="input-range" id="input-maxrange" maxlength="3">
+        <input type="number" name="" class="input-range" id="input-maxrange">
       </div>
       <button id="btn-update">Update</button>
     </div>
   </form>
-  <form>
+  <form id="form-challenger">
     <p>The Current Range is <span id="range-min"> 1</span> to <span id="range-max"> 100</span></p>
     <h3>Challenger 1</h3>
       <div class="name-input-wrapper">

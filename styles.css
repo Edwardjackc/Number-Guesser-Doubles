@@ -98,10 +98,6 @@ form{
   align-self: flex-end;
 }
 
-.error{
-  border:2px solid pink;
-}
-
 #range-min,
 #range-max{
   font-weight:700;
@@ -168,6 +164,12 @@ form{
 #guess-output-high-low2{
   font-size:1.2em;
 }
+
+.error{
+  border:2px solid pink;
+  outline: none;
+}
+
 /*---------- Aside -----------------*/
 aside{
   background-color:#d0d2d3;
@@ -222,10 +224,19 @@ hr{
   font-size:1.5em;
 }
 
+.fa-times-circle{
+  width: 16px;
+}
+
 .card-bottom-wrapper{
   display:flex;
   justify-content:space-between;
   margin: 0px 15px;
+  align-items: baseline;
+}
+
+.hidden{
+  visibility: none;
 }
 
 /*---------- Media Queries ---------*/
