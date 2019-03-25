@@ -27,10 +27,11 @@ var btnHideCard = document.querySelector('.fa-times-circle');
 var asideColumn = document.querySelector('aside');
 var formUpdateRange = document.querySelector('#form-range');
 var formChallenger = document.querySelector('#form-challenger');
+var winnerCard =  document.querySelector('section')
 /*---------- Global Variables ----------*/
 var outputWinner;
 var randomNum;
-var timeToGuess;
+let timer = 0;
 var guessCounter = 1;
 
 /*---------- Event Listeners -----------*/
@@ -41,11 +42,13 @@ btnSubmit.addEventListener('click', playGame);
 // btnReset.addEventListener('click', resetGame); 
 btnClear.addEventListener('click', resetChallengerForm);
 // btnClear.addEventListener('keydown', toggleClear);
-inputGuessCh1.addEventListener('keydown', validateRange)
-inputGuessCh2.addEventListener('keydown', validateRange)
-inputRangeMax.addEventListener('keydown', validateRange)
-inputRangeMin.addEventListener('keydown', validateRange)
-asideColumn.addEventListener('click', deleteCard)
+inputGuessCh1.addEventListener('keydown', validateForNumber);
+inputGuessCh2.addEventListener('keydown', validateForNumber);
+inputRangeMax.addEventListener('keydown', validateForNumber);
+inputRangeMin.addEventListener('keydown', validateForNumber);
+inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
+inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
+asideColumn.addEventListener('click', deleteCard);
 
 
 /*---------- Functions -----------------*/
@@ -55,9 +58,17 @@ function makeRandomNumber(min, max) {
   return randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function validateRange(e) {
-  var regex = /[\t\n\b0-9]/;
+function validateForNumber(e) {
+  var regex = /^[0-9\t\n\r]*/;
   if (e.key === 'Backspace' || regex.test(e.key)) {
+  } else {
+    e.preventDefault();
+  }
+}
+
+function validateForAlphaNumeric(e){
+  var regex = /^[\w\t\n\r]]*/;
+  if (e.key === 'Backspace' || regex.test(e.key)){
   } else {
     e.preventDefault();
   }
@@ -81,18 +92,17 @@ function checkGuess(inputGuess) {
     inputName = inputNameCh2;
   } 
   if(inputGuess.value == randomNum) { 
+    increaseDifficulty();
     winner(outputHighLow, inputName)
     guessCounter = 0;
   } else if (inputGuessCh2.value < randomNum) {
     tooLow(outputHighLow)
     guessCounter ++;
   } else { 
-    tooHigh(outputHighLow)
+    tooHigh(outputHighLow);
     guessCounter ++;
     }
 }
-
-
 
 function tooLow(outputHighLow){
   outputHighLow.innerText = 'that\'s too low';
@@ -107,11 +117,6 @@ function winner(outputHighLow, inputName){
   outputHighLow.innerText = 'BOOM';
   appendCard();
 }
-// function checkMinMax(){
-//   if(pareseInt(inputGuessCh1.value) || parseInt(inputGuessCh2.value) > || <)
-// }
-
-
 
 function resetChallengerForm(e){
   e.preventDefault();
@@ -122,14 +127,14 @@ function playGame(e) {
   e.preventDefault();
   displayNames();
   checkGuess(inputGuessCh1);
-  checkGuess(inputGuessCh2)
+  checkGuess(inputGuessCh2);
 }; 
 
 function displayNames(){
-  outputNameCh1.innerText = inputNameCh1.value;
-  outputGuessCh1.innerText = inputGuessCh1.value;
-  outputNameCh2.innerText = inputNameCh2.value;
-  outputGuessCh2.innerText = inputGuessCh2.value;
+  outputNameCh1.innerText = inputNameCh1.value || 'Challenger 1';
+  outputGuessCh1.innerText = inputGuessCh1.value || '--';
+  outputNameCh2.innerText = inputNameCh2.value || 'Challenger 2';
+  outputGuessCh2.innerText = inputGuessCh2.value || '--';
 }
 
 function addError(input) {
@@ -143,24 +148,31 @@ function removeError(input){
 function appendCard(){
   asideColumn.innerHTML += `<section class="card-winner">
       <div class="versus-challenger">
-        <p class="card-output-ch1">${inputNameCh1.value}</p>
+        <p class="card-output-ch1">${inputNameCh1.value || `Challenger 1`}</p>
         <p class="vs-style">VS</p>
-        <p class="card-output-ch2">${inputNameCh2.value}</p>
+        <p class="card-output-ch2">${inputNameCh2.value || `Challenger 2`}</p>
       </div>
       <hr>
       <div class="card-output-results">
-        <h2 class="winner">${outputWinner}</h2>
+        <h2 class="winner">${outputWinner || 'Challenger'}</h2>
         <p class="card-style-winner">Winner</p>
       </div>
       <hr>
       <div class="card-bottom-wrapper">
         <p><span class="card-num-guess">${guessCounter} </span>Guesses</p>
-        <p><span class="card-min">- -- </span>Minutes</p>
+        <p><span class="card-min">${timer} </span>Seconds</p>
         <i class="fas fa-times-circle delete"></i>
       </div>
     </section>`
       makeRandomNumber();
       console.log(randomNum);
+      clearInterval(timer)
+      timer = 0;
+}
+
+
+function increaseDifficulty(){
+  makeRandomNumber(+10, +10)
 }
 
 function deleteCard(e){
@@ -169,5 +181,10 @@ function deleteCard(e){
   }
 }
 
+function startClock(){
+  setInterval(()=>timer++, 1000)
+}
+
 window.onload = makeRandomNumber();
+window.onload = startClock();
 console.log(randomNum);
