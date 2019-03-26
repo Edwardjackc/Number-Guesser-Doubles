@@ -42,42 +42,44 @@ btnSubmit.addEventListener('click', playGame);
 // btnReset.addEventListener('click', resetGame); 
 btnClear.addEventListener('click', resetChallengerForm);
 // btnClear.addEventListener('keydown', toggleClear);
-inputGuessCh1.addEventListener('keydown', validateForNumber);
-inputGuessCh2.addEventListener('keydown', validateForNumber);
-inputRangeMax.addEventListener('keydown', validateForNumber);
-inputRangeMin.addEventListener('keydown', validateForNumber);
+inputGuessCh1.addEventListener('keydown', validateRange);
+inputGuessCh2.addEventListener('keydown', validateRange);
+inputRangeMax.addEventListener('keydown', validateRange);
+inputRangeMin.addEventListener('keydown', validateRange);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
 inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
 asideColumn.addEventListener('click', deleteCard);
 
 
 /*---------- Functions -----------------*/
+
 function makeRandomNumber(min, max) {
   min = parseInt(inputRangeMin.value) || 1;
-  max = parseInt(inputRangeMax.value)|| 100;
+  max = parseInt(inputRangeMax.value) || 100;
   return randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function validateForNumber(e) {
-  var regex = /^[0-9\t\n\r]*/;
-  if (e.key === 'Backspace' || regex.test(e.key)) {
+function validateRange(e){
+  var regexChar = /[\d\t\n\r]/;
+  if (e.key === 'Backspace' || regexChar.test(e.key)){
   } else {
     e.preventDefault();
   }
 }
 
 function validateForAlphaNumeric(e){
-  var regex = /^[\w\t\n\r]]*/;
-  if (e.key === 'Backspace' || regex.test(e.key)){
+  var regexChar = /[\w\t\n\r]/;
+  if (e.key === 'Backspace' || regexChar.test(e.key)){
   } else {
     e.preventDefault();
   }
 }
 
+
 function updateRange(e) {
   e.preventDefault();
-  outputRangeMin.innerText = inputRangeMin.value;
-  outputRangeMax.innerText = inputRangeMax.value;
+  outputRangeMin.innerText = parseInt(inputRangeMin.value);
+  outputRangeMax.innerText = parseInt(inputRangeMax.value);
   makeRandomNumber();
   console.log(randomNum);
   formUpdateRange.reset();
@@ -126,9 +128,11 @@ function resetChallengerForm(e){
 function playGame(e) {
   e.preventDefault();
   displayNames();
+
   checkGuess(inputGuessCh1);
   checkGuess(inputGuessCh2);
 }; 
+
 
 function displayNames(){
   outputNameCh1.innerText = inputNameCh1.value || 'Challenger 1';
@@ -170,9 +174,10 @@ function appendCard(){
       timer = 0;
 }
 
-
 function increaseDifficulty(){
-  makeRandomNumber(+10, +10)
+  var decreasedMin = parseInt(outputRangeMin) - 10;
+  var increasedMax = parseInt(outputRangeMax) + 10;
+  
 }
 
 function deleteCard(e){

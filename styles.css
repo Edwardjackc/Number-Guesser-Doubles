@@ -74,6 +74,7 @@ label{
 
 input{
   padding:5px; 
+  border: 1px solid lightgrey;
 }
 
 form{
@@ -115,7 +116,6 @@ form{
 }
 
 .name-input-challengers{
-  border: 1px solid lightgrey;
   width: 220px;
 }
 .guesses-challenger{
