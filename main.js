@@ -31,6 +31,8 @@ var winnerCard =  document.querySelector('section')
 /*---------- Global Variables ----------*/
 var outputWinner;
 var randomNum;
+let minNumber = parseInt(inputRangeMin.value) || 1;
+let maxNumber = parseInt(inputRangeMax.value) || 100;
 let timer = 0;
 var guessCounter = 1;
 
@@ -54,9 +56,11 @@ asideColumn.addEventListener('click', deleteCard);
 /*---------- Functions -----------------*/
 
 function makeRandomNumber(min, max) {
-  min = parseInt(inputRangeMin.value) || 1;
-  max = parseInt(inputRangeMax.value) || 100;
-  return randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  if(minNumber<=0){
+    minNumber = 1
+  }
+  return randomNum = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+  console.log(randomNum)
 }
 
 function validateRange(e){
@@ -78,12 +82,18 @@ function validateForAlphaNumeric(e){
 
 function updateRange(e) {
   e.preventDefault();
-  outputRangeMin.innerText = parseInt(inputRangeMin.value);
-  outputRangeMax.innerText = parseInt(inputRangeMax.value);
+  minNumber = parseInt(inputRangeMin.value);
+  maxNumber = parseInt(inputRangeMax.value);
   makeRandomNumber();
-  console.log(randomNum);
+  changeDOMRange();
   formUpdateRange.reset();
 };
+
+function changeDOMRange(){
+  outputRangeMin.innerText = minNumber;
+  outputRangeMax.innerText = maxNumber;
+  console.log(randomNum);
+}
 
 function checkGuess(inputGuess) {
   //determines which user we're checking
@@ -94,9 +104,9 @@ function checkGuess(inputGuess) {
     inputName = inputNameCh2;
   } 
   if(inputGuess.value == randomNum) { 
-    increaseDifficulty();
     winner(outputHighLow, inputName)
     guessCounter = 0;
+    increaseDifficulty()
   } else if (inputGuessCh2.value < randomNum) {
     tooLow(outputHighLow)
     guessCounter ++;
@@ -128,7 +138,6 @@ function resetChallengerForm(e){
 function playGame(e) {
   e.preventDefault();
   displayNames();
-
   checkGuess(inputGuessCh1);
   checkGuess(inputGuessCh2);
 }; 
@@ -142,11 +151,12 @@ function displayNames(){
 }
 
 function addError(input) {
+  if(inputAll = ''){
     input.classList.add('error');
-  }  
-
-function removeError(input){
+    return
+  }else{
     input.classList.remove('error');
+  }
 }
 
 function appendCard(){
@@ -175,9 +185,15 @@ function appendCard(){
 }
 
 function increaseDifficulty(){
-  var decreasedMin = parseInt(outputRangeMin) - 10;
-  var increasedMax = parseInt(outputRangeMax) + 10;
-  
+  minNumber = minNumber -10;
+  maxNumber = maxNumber +10;
+  if (minNumber <= 0){
+    outputRangeMin.innerText = 1;
+    outputRangeMax.innerText = maxNumber;
+  }else{
+  outputRangeMin.innerText = minNumber;
+  outputRangeMax.innerText = maxNumber;
+  }
 }
 
 function deleteCard(e){
