@@ -7,11 +7,12 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 </head>
 <body>
 <header>
-  <h1>NUMBER<span>GUESSER</span></h1>
-  <p class="sub"><sup>________</sup> ULTIMATE CHALLENGER EDITION <sup>________</sup></p>
+  <h1 class="animated slideInDown">NUMBER</span>GUESSER</span></h1>
+  <p class="sub animated slideInDown"><sup>________</sup> ULTIMATE CHALLENGER EDITION <sup>________</sup></p>
 </header>
 <main>
 <article>
@@ -20,11 +21,11 @@
     <div class="range-flex">
       <div class="input-range-wrapper">
         <label for="input-minrange">Min Range</label>
-        <input type="number" name="" class="input-range" type="tel" minlength="1" maxlength="3" id="input-minrange">
+        <input type="text" name="" class="input-range" type="text" minlength="1" maxlength="3" id="input-minrange">
       </div>
       <div class="input-range-wrapper">
         <label for="input-maxrange">Max Range</label>
-        <input type="number" name="" class="input-range" id="input-maxrange">
+        <input type="text" name="" class="input-range" minlength="1" maxlength="3" id="input-maxrange">
       </div>
       <button id="btn-update">Update</button>
     </div>
@@ -38,7 +39,7 @@
       </div>
       <div class="guess-input-wrapper">
         <label for="input-guess-challenger1">Guess</label>
-        <input type="number" name="" class="guesses-challenger" id="input-guess-challenger1">
+        <input type="text" name="" class="guesses-challenger" minlength="1" maxlength="3" id="input-guess-challenger1">
       </div>
     <h3>Challenger 2</h3>
     <div class="name-input-wrapper">  
@@ -47,7 +48,7 @@
     </div>
     <div class="guess-input-wrapper">
       <label for="input-guess-challenger2">Guess</label>
-      <input type="number" name="" class="guesses-challenger" id="input-guess-challenger2"> 
+      <input type="text" name="" class="guesses-challenger" minlength="1" maxlength="3" id="input-guess-challenger2"> 
     </div>
     </div>
     <div class="btn-wrapper">  
@@ -62,38 +63,18 @@
       <div class="latest-guess-challenger1">
         <h4 id="name-output-challenger1">Challenger 1 Name</h4>
         <p class="guess-current-style">current guess</p>
-        <p id="guess-output-challenger1"> -- </p>
+        <p id="guess-output-challenger1" class="animated rubberBand"> -- </p>
         <p id="guess-output-high-low1"> thats to low </p>
       </div>
       <div class="latest-guess-challenger2">
         <h4 id="name-output-challenger2">Challenger 2 Name</h4>
         <p class="guess-current-style">current guess</p>
-        <p id="guess-output-challenger2"> -- </p>
+        <p id="guess-output-challenger2" class="animated rubberBand"> -- </p>
         <p id="guess-output-high-low2"> thats to high</p>
       </div>
     </div>
 </article>
 <aside>
-  <!-- <template> -->
-<!--     <section class="card-winner">
-      <div class="versus-challenger">
-        <p class="card-output-ch1">Challenger 1 Name</p>
-        <p class="vs-style">VS</p>
-        <p class="card-output-ch2">Challenger 2 Name</p>
-      </div>
-      <hr>
-      <div class="card-output-results">
-        <h2 class="winner"> -- </h2>
-        <p class="card-style-winner">Winner</p>
-      </div>
-      <hr>
-      <div class="card-bottom-wrapper">
-        <p><span class="card-num-guess"> -- </span>Guesses</p>
-        <p><span class="card-min">- -- </span>Minutes</p>
-        <p>X</p>
-      </div>
-    </section> -->
-  <!-- </template>  -->
 </aside>
 </main>
 <script type="text/javascript" src="main.js"></script>
