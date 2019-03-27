@@ -62,6 +62,10 @@ inputGuessCh2.addEventListener('input', validateCh2Guess);
 
 inputGuessCh1.addEventListener('keydown', validateRange);
 inputGuessCh2.addEventListener('keydown', validateRange);
+inputGuessCh1.addEventListener('keyup', toggleDisabledReset)
+inputGuessCh1.addEventListener('keyup', toggleDisabledClear)
+inputGuessCh2.addEventListener('keyup', toggleDisabledReset)
+inputGuessCh2.addEventListener('keyup' toggleDisabledClear)
 inputRangeMax.addEventListener('keydown', validateRange);
 inputRangeMin.addEventListener('keydown', validateRange);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
@@ -71,19 +75,40 @@ asideColumn.addEventListener('click', deleteCard);
 
 
 
+
 /*---------- Functions -----------------*/
 
 function makeRandomNumber() {
-  if(minNumber<=0){
+    if(minNumber<=0){
     minNumber = 1;
   }
   randomNum = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
   console.log(randomNum)
 }
 
+function toggleDisabledReset() {
+   if (inputGuessCh1.value != '' || inputNameCh2.value != '' || inputGuessCh1.value != '' || inputGuessCh2.value != '')
+  {
+    btnReset.removeAttribute('disabled')
+  } else {
+    btnReset.setAttribute('enabled')
+
+   }
+  }
+
+
+function toggleDisabledClear() {
+   if (inputGuessCh1.value != '' || inputNameCh2.value != '' || inputGuessCh1.value != '' || inputGuessCh2.value != '')
+  {
+    btnClear.removeAttribute('disabled')
+  } else {
+    btnClear.setAttribute('enabled')
+   }
+}
+
 function validateRange(e){
-  var regex = /[\w\t\n\r]/;
-  if (e.key === 'Backspace' || regex.test(e.key)){
+  var regexCharNum = /[\d\t\n\r]/;
+  if (e.key === 'Backspace' || regexCharNum.test(e.key)){
   } else {
     e.preventDefault();
   }
