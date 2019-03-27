@@ -96,6 +96,10 @@ form{
   margin-left: auto;
 }
 
+:disabled{
+ background-color: lightgrey;
+}
+
 .range-flex{
   display: flex;
 }

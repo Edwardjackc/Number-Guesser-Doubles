@@ -46,34 +46,40 @@ var guessCounter = 1;
 var highScoreCount;
 
 /*---------- Event Listeners -----------*/
-btnUpdateRange.addEventListener('click', updateRange);
+btnUpdateRange.addEventListener('click', validateInputRange);
 btnSubmit.addEventListener('click', playGame);
 // btnHideCard.addEventListener('click', deleteCard);
 // btnReset.addEventListener('keydown' toggleReset)
 // btnReset.addEventListener('click', resetGame); 
 btnClear.addEventListener('click', resetChallengerForm);
 // btnClear.addEventListener('keydown', toggleClear);
-inputRangeMin.addEventListener('focusout', checkRangeMin)
+// inputRangeMin.addEventListener('focusout', checkRangeMin)
 
 inputNameCh1.addEventListener('input', validateCh1Name);
 inputGuessCh1.addEventListener('input', validateCh1Guess);
+inputNameCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputGuessCh1.addEventListener('keyup', toggleDisabledClear)
+// inputGuessCh1.addEventListener('keydown', validateRange);
+
 inputNameCh2.addEventListener('input', validateCh2Name);
 inputGuessCh2.addEventListener('input', validateCh2Guess);
+// inputGuessCh2.addEventListener('keydown', validateRange);
+inputNameCh2.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputGuessCh2.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputGuessCh2.addEventListener('keyup', toggleDisabledClear)
 
-inputGuessCh1.addEventListener('keydown', validateRange);
-inputGuessCh2.addEventListener('keydown', validateRange);
-inputGuessCh1.addEventListener('keyup', toggleDisabledReset)
-inputGuessCh1.addEventListener('keyup', toggleDisabledClear)
-inputGuessCh2.addEventListener('keyup', toggleDisabledReset)
-inputGuessCh2.addEventListener('keyup' toggleDisabledClear)
-inputRangeMax.addEventListener('keydown', validateRange);
-inputRangeMin.addEventListener('keydown', validateRange);
+// inputRangeMax.addEventListener('keydown', validateRange);
+// inputRangeMin.addEventListener('keydown', validateRange);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
 // inputNameCh1.addEventListener('input', validateCh1Name);
 inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
 asideColumn.addEventListener('click', deleteCard);
 
 /*---------- Functions -----------------*/
+
+
+
 
 function makeRandomNumber() {
     if(minNumber<=0){
@@ -83,15 +89,38 @@ function makeRandomNumber() {
   console.log(randomNum)
 }
 
-function toggleDisabledReset() {
-   if (inputGuessCh1.value != '' || inputNameCh2.value != '' || inputGuessCh1.value != '' || inputGuessCh2.value != '')
+
+// function toggleDisabledBtnUpdate() {
+//    if (inputRangeMin && inputRangeMax !='')
+//   {
+//     btnUpdateRange.removeAttribute('disabled')
+//   } else {
+//     btnUpdateRange.setAttribute('disabled', 'disabled')
+
+//    }
+// }
+
+
+function toggleDisabledBtnSubmit() {
+   if (inputGuessCh1.value && inputGuessCh2.value && inputNameCh1.value && inputNameCh2.value !='')
   {
-    btnReset.removeAttribute('disabled')
+    btnSubmit.removeAttribute('disabled')
   } else {
-    btnReset.setAttribute('enabled')
+    btnSubmit.setAttribute('disabled', 'disabled')
 
    }
-  }
+}
+
+function toggleDisabledClear() {
+   if (inputGuessCh1.value || inputGuessCh2.value || inputNameCh1.value || inputNameCh2.value !='')
+  {
+    btnClear.removeAttribute('disabled')
+  } else {
+    btnClear.setAttribute('disabled', 'disabled')
+
+   }
+}
+
 
 
 function toggleDisabledClear() {
@@ -99,23 +128,20 @@ function toggleDisabledClear() {
   {
     btnClear.removeAttribute('disabled')
   } else {
-    btnClear.setAttribute('enabled')
+    btnClear.setAttribute('disabled', 'disabled')
    }
 }
 
 
-function validateRange(e){
-  var regex = /[\d\t\n\r]/g;
-  if (e.key === 'Backspace' || regex.test(e.key)){
+// function validateRange(e) {
+//   var regexCharNum = /[\d\t\n\r]/;
+//   if (e.key === 'Backspace' || regexCharNum.test(e.key)){
+//   } else {
+//     e.preventDefault();
+//   }
+// }
 
-  var regexCharNum = /[\d\t\n\r]/;
-  if (e.key === 'Backspace' || regexCharNum.test(e.key)){
-  } else {
-    e.preventDefault();
-  }
-}
-
-function validateForAlphaNumeric(e){
+function validateForAlphaNumeric(e) {
   var regexChar = /[\w\t\n\r]/;
   if (e.key === 'Backspace' || regexChar.test(e.key)){
   } else {
@@ -163,17 +189,17 @@ function validateCh2Guess(){
   }
 }
 
-function checkRangeMin(e){
-  if(inputRangeMin.value > outputRangeMax.value){
-    inputRangeMin.classList.add('error')
-    errorInputMin.style.display = 'block';
-    btnUpdateRange.setAttribute('disabled','true');
-  } else {
-    inputRangeMin.classList.remove('error')
-    errorInputMin.style.display = 'none';
-    btnUpdateRange.removeAttribute('disabled')
-  }
-}
+// function checkRangeMin(e){
+//   if(inputRangeMin.value > outputRangeMax.value){
+//     inputRangeMin.classList.add('error')
+//     errorInputMin.style.display = 'block';
+//     btnUpdateRange.setAttribute('disabled','true');
+//   } else {
+//     inputRangeMin.classList.remove('error')
+//     errorInputMin.style.display = 'none';
+//     btnUpdateRange.removeAttribute('disabled')
+//   }
+// }
 
 
 function validateAllInputs(){
@@ -183,22 +209,26 @@ function validateAllInputs(){
   validateCh2Name()
 }
 
-function validateRange(e){
-  if(minNumber >= maxNumber){
+function validateInputRange(e){
+  e.preventDefault();
+  if (inputRangeMin.value > inputRangeMax.value) {
     inputRangeMin.classList.add('error')
-    errorInputMin.style.display = 'block';
-  } else if (maxNumber <= minNumber) {
     inputRangeMax.classList.add('error')
+    errorInputMin.style.display = 'block';
+    errorInputMax.style.display = 'block';
+    return
+    } else if (inputRangeMin.value < inputRangeMax.value) {
+    inputRangeMax.classList.remove('error')
     errorInputMax.style.display = 'none';
+    inputRangeMin.classList.remove('error')
+    errorInputMin.style.display = 'none'
+    updateRange();
   }
 }
 
-
-function updateRange(e) {
-  e.preventDefault();
+function updateRange() {
   minNumber = parseInt(inputRangeMin.value) || 1;
   maxNumber = parseInt(inputRangeMax.value) || 100;
-  validateRange()
   makeRandomNumber();
   changeDOMRange();
   formUpdateRange.reset();
