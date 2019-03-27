@@ -105,6 +105,9 @@ function toggleDisabledClear() {
 
 
 function validateRange(e){
+  var regex = /[\d\t\n\r]/g;
+  if (e.key === 'Backspace' || regex.test(e.key)){
+
   var regexCharNum = /[\d\t\n\r]/;
   if (e.key === 'Backspace' || regexCharNum.test(e.key)){
   } else {
@@ -165,10 +168,10 @@ function checkRangeMin(e){
     inputRangeMin.classList.add('error')
     errorInputMin.style.display = 'block';
     btnUpdateRange.setAttribute('disabled','true');
-} else {
-  inputRangeMin.classList.remove('error')
-  errorInputMin.style.display = 'none';
-  btnUpdateRange.removeAttribute('disabled')
+  } else {
+    inputRangeMin.classList.remove('error')
+    errorInputMin.style.display = 'none';
+    btnUpdateRange.removeAttribute('disabled')
   }
 }
 
@@ -219,6 +222,13 @@ function checkGuess(inputGuess) {
     tooLow(outputHighLow)
   } else { 
     tooHigh(outputHighLow);
+  }
+}
+
+class Guess {
+  constructor(name, guess){
+    this.name = name;
+    this.guess = guess;
   }
 }
 
