@@ -104,22 +104,25 @@ form{
   font-weight:700;
   text-decoration:underline;
 }
+.form-challenger-input-wrapper{
+  display: flex;
 
-.name-input-wrapper{
-  display:inline-block;
-  width: 60%;
 }
 
+/*.name-input-wrapper{
+  display:inline-block;
+}*/
+
 .guess-input-wrapper{
-  display: inline-block;
-  width:30%;
+/*  display: inline-block;*/
+  margin-left: 10px;
 }
 
 .name-input-challengers{
-  width: 220px;
+/*  width: 220px;*/
 }
 .guesses-challenger{
-  width: 145px;
+/*  width: 145px;*/
 }
 
 .btn-wrapper{

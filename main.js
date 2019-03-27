@@ -34,7 +34,9 @@ var randomNum;
 let minNumber = parseInt(inputRangeMin.value) || 1;
 let maxNumber = parseInt(inputRangeMax.value) || 100;
 let timer = 0;
+let timerMin = 0;
 var guessCounter = 1;
+var highScoreCount;
 
 /*---------- Event Listeners -----------*/
 btnUpdateRange.addEventListener('click', updateRange);
@@ -138,6 +140,7 @@ function resetChallengerForm(e){
 function playGame(e) {
   e.preventDefault();
   displayNames();
+  // validateInput()
   checkGuess(inputGuessCh1);
   checkGuess(inputGuessCh2);
 }; 
@@ -150,14 +153,14 @@ function displayNames(){
   outputGuessCh2.innerText = inputGuessCh2.value || '--';
 }
 
-function addError(input) {
-  if(inputAll = ''){
-    input.classList.add('error');
-    return
-  }else{
-    input.classList.remove('error');
-  }
-}
+// function validateInput(input) {
+//   if(inputAll = ''){
+//     inputAll.classList.add('error');
+//     return
+//   }else{
+//     inputAll.classList.remove('error');
+//   }
+// }
 
 function appendCard(){
   asideColumn.innerHTML += `<section class="card-winner">
