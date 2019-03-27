@@ -73,9 +73,6 @@ inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
 inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
 asideColumn.addEventListener('click', deleteCard);
 
-
-
-
 /*---------- Functions -----------------*/
 
 function makeRandomNumber() {
@@ -105,6 +102,7 @@ function toggleDisabledClear() {
     btnClear.setAttribute('enabled')
    }
 }
+
 
 function validateRange(e){
   var regexCharNum = /[\d\t\n\r]/;
@@ -266,15 +264,6 @@ function displayNames(){
   outputNameCh2.innerText = inputNameCh2.value || 'Challenger 2 Name';
   outputGuessCh2.innerText = inputGuessCh2.value || '--';
 }
-
-// function validateInput(input) {
-//   if(inputAll = ''){
-//     inputAll.classList.add('error');
-//     return
-//   }else{
-//     inputAll.classList.remove('error');
-//   }
-// }
 
 function appendCard(){
   asideColumn.innerHTML += `<section class="card-winner">
