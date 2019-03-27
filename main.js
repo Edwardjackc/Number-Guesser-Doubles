@@ -82,7 +82,7 @@ function makeRandomNumber() {
 }
 
 function validateRange(e){
-  var regex = /[\w\t\n\r]/;
+  var regex = /[\d\t\n\r]/g;
   if (e.key === 'Backspace' || regex.test(e.key)){
   } else {
     e.preventDefault();
@@ -142,10 +142,10 @@ function checkRangeMin(e){
     inputRangeMin.classList.add('error')
     errorInputMin.style.display = 'block';
     btnUpdateRange.setAttribute('disabled','true');
-} else {
-  inputRangeMin.classList.remove('error')
-  errorInputMin.style.display = 'none';
-  btnUpdateRange.removeAttribute('disabled')
+  } else {
+    inputRangeMin.classList.remove('error')
+    errorInputMin.style.display = 'none';
+    btnUpdateRange.removeAttribute('disabled')
   }
 }
 
@@ -196,6 +196,13 @@ function checkGuess(inputGuess) {
     tooLow(outputHighLow)
   } else { 
     tooHigh(outputHighLow);
+  }
+}
+
+class Guess {
+  constructor(name, guess){
+    this.name = name;
+    this.guess = guess;
   }
 }
 
