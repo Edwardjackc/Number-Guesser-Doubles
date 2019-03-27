@@ -23,6 +23,10 @@ h3,
 h4{
   margin: 0;
 }
+
+img{
+  width:10px;
+}
 /*---------- Header ----------------*/
 header{
   background-color:#404041;
@@ -37,7 +41,7 @@ h1{
 }
 
 h1 span{
-  font-weight:400;
+  font-weight:300;
 }
 
 .sub{
@@ -82,7 +86,7 @@ form{
   border:1px solid #d0d2d3;
   margin:10px 20px;
   padding: 10px;
-  max-width: 400px;
+  max-width: 500px;
   margin-left: auto;
 }
 
@@ -106,7 +110,6 @@ form{
 }
 .form-challenger-input-wrapper{
   display: flex;
-
 }
 
 /*.name-input-wrapper{
@@ -125,6 +128,12 @@ form{
 /*  width: 145px;*/
 }
 
+.hidden-error{
+  color: #DD1972;
+  font-weight: 300;
+  display: none;
+}
+
 .btn-wrapper{
   display: flex;
   justify-content: space-between;
@@ -136,7 +145,7 @@ form{
   margin: 10px 20px;
   border: 1px solid #d0d2d3;
   padding: 10px;
-  max-width: 400px;
+  max-width: 500px;
   margin-left: auto;
 }
 
@@ -144,12 +153,6 @@ form{
   display: flex;
   justify-content: space-around;
   text-align: center;
-  flex-direction: row;
-}
-
-.latest-guess-challenger1{
-  border-right: 1px solid lightgrey;
-  padding-right: 5%;
 }
 
 .guess-current-style{
@@ -169,7 +172,7 @@ form{
 }
 
 .error{
-  border:2px solid pink;
+  border:2px solid #DD1972;
   outline: none;
 }
 
@@ -182,6 +185,7 @@ aside{
   width:50%;
 
 }
+
 hr{
   margin: 0 10px;
 }
@@ -191,24 +195,20 @@ hr{
   margin:10px 20px;
   border: 1px solid #6e6e6e;
   padding: 10px;
-  max-width: 400px;
-}
-
-.winner{
+  max-width: 500px;
   text-transform: uppercase;
 }
 
 .versus-challenger{
   display:flex;
   justify-content:space-around;
-  align-items:baseline;
+  align-items:baseline;  
   margin-bottom:5px;
 }
 
 .card-output-ch1,
 .card-output-ch2{
   font-weight: 700;
-  text-transform:uppercase;
   font-size: .8em;
 }
 
@@ -219,11 +219,9 @@ hr{
 
 .card-output-results{
   text-align:center;
-
 }
 
 .card-style-winner{
-  text-transform:uppercase;
   font-size:1.5em;
 }
 
@@ -238,8 +236,9 @@ hr{
   align-items: baseline;
 }
 
-.hidden{
-  visibility: none;
+.card-num-guess,
+.card-min{
+  font-weight: 700;
 }
 
 /*---------- Media Queries ---------*/

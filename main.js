@@ -28,9 +28,16 @@ var asideColumn = document.querySelector('aside');
 var formUpdateRange = document.querySelector('#form-range');
 var formChallenger = document.querySelector('#form-challenger');
 var winnerCard =  document.querySelector('section')
+
+var error = document.querySelector('.hidden-error')
+var errorName1 = document.querySelector('#name-error-1')
+var errorName2 = document.querySelector('#name-error-2')
+var errorGuess1 = document.querySelector('#guess-error-1')
+var errorGuess2 = document.querySelector('#guess-error-2')
+var errorInputMin = document.querySelector('#range-error-min')
+var errorInputMax = document.querySelector('#range-error-max')
 /*---------- Global Variables ----------*/
 var outputWinner;
-var randomNum;
 let minNumber = parseInt(inputRangeMin.value) || 1;
 let maxNumber = parseInt(inputRangeMax.value) || 100;
 let timer = 0;
@@ -46,28 +53,37 @@ btnSubmit.addEventListener('click', playGame);
 // btnReset.addEventListener('click', resetGame); 
 btnClear.addEventListener('click', resetChallengerForm);
 // btnClear.addEventListener('keydown', toggleClear);
+inputRangeMin.addEventListener('focusout', checkRangeMin)
+
+inputNameCh1.addEventListener('input', validateCh1Name);
+inputGuessCh1.addEventListener('input', validateCh1Guess);
+inputNameCh2.addEventListener('input', validateCh2Name);
+inputGuessCh2.addEventListener('input', validateCh2Guess);
+
 inputGuessCh1.addEventListener('keydown', validateRange);
 inputGuessCh2.addEventListener('keydown', validateRange);
 inputRangeMax.addEventListener('keydown', validateRange);
 inputRangeMin.addEventListener('keydown', validateRange);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
+// inputNameCh1.addEventListener('input', validateCh1Name);
 inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
 asideColumn.addEventListener('click', deleteCard);
 
 
+
 /*---------- Functions -----------------*/
 
-function makeRandomNumber(min, max) {
+function makeRandomNumber() {
   if(minNumber<=0){
-    minNumber = 1
+    minNumber = 1;
   }
-  return randomNum = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+  randomNum = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
   console.log(randomNum)
 }
 
 function validateRange(e){
-  var regexChar = /[\d\t\n\r]/;
-  if (e.key === 'Backspace' || regexChar.test(e.key)){
+  var regex = /[\w\t\n\r]/;
+  if (e.key === 'Backspace' || regex.test(e.key)){
   } else {
     e.preventDefault();
   }
@@ -81,24 +97,93 @@ function validateForAlphaNumeric(e){
   }
 }
 
+function validateCh1Name(){
+  if(inputNameCh1.value == ''){
+    inputNameCh1.classList.add('error')
+    errorName1.style.display = 'block';
+  } else {
+    inputNameCh1.classList.remove('error');
+    errorName1.style.display=  'none';
+  }
+}
+
+function validateCh2Name(){
+  if(inputNameCh2.value == ''){
+    inputNameCh2.classList.add('error')
+    errorName2.style.display = 'block';
+  } else {
+    inputNameCh2.classList.remove('error');
+    errorName2.style.display = 'none';
+  }
+}
+
+function validateCh1Guess(){
+  if(inputGuessCh1.value == '' || inputGuessCh1.value == /[\d]/){
+    inputGuessCh1.classList.add('error');
+    errorGuess1.style.display= 'block';
+  } else {
+    inputGuessCh1.classList.remove('error');
+    errorGuess1.style.display = 'none';
+  } 
+}
+
+function validateCh2Guess(){
+  if(inputGuessCh2.value == ''){
+    inputGuessCh2.classList.add('error')
+    errorGuess2.style.display = 'block';
+  } else {
+    inputGuessCh2.classList.remove('error')
+    errorGuess2.style.display = 'none'
+  }
+}
+
+function checkRangeMin(e){
+  if(inputRangeMin.value > outputRangeMax.value){
+    inputRangeMin.classList.add('error')
+    errorInputMin.style.display = 'block';
+    btnUpdateRange.setAttribute('disabled','true');
+} else {
+  inputRangeMin.classList.remove('error')
+  errorInputMin.style.display = 'none';
+  btnUpdateRange.removeAttribute('disabled')
+  }
+}
+
+
+function validateAllInputs(){
+  validateCh1Guess()
+  validateCh2Guess()
+  validateCh1Name()
+  validateCh2Name()
+}
+
+function validateRange(e){
+  if(minNumber >= maxNumber){
+    inputRangeMin.classList.add('error')
+    errorInputMin.style.display = 'block';
+  } else if (maxNumber <= minNumber) {
+    inputRangeMax.classList.add('error')
+    errorInputMax.style.display = 'none';
+  }
+}
+
 
 function updateRange(e) {
   e.preventDefault();
-  minNumber = parseInt(inputRangeMin.value);
-  maxNumber = parseInt(inputRangeMax.value);
+  minNumber = parseInt(inputRangeMin.value) || 1;
+  maxNumber = parseInt(inputRangeMax.value) || 100;
+  validateRange()
   makeRandomNumber();
   changeDOMRange();
   formUpdateRange.reset();
-};
+}
 
 function changeDOMRange(){
   outputRangeMin.innerText = minNumber;
   outputRangeMax.innerText = maxNumber;
-  console.log(randomNum);
 }
 
 function checkGuess(inputGuess) {
-  //determines which user we're checking
   let outputHighLow = outputHighLow1;
   let inputName = inputNameCh1;
   if(inputGuess.id === inputGuessCh2.id){
@@ -107,29 +192,29 @@ function checkGuess(inputGuess) {
   } 
   if(inputGuess.value == randomNum) { 
     winner(outputHighLow, inputName)
-    guessCounter = 0;
-    increaseDifficulty()
-  } else if (inputGuessCh2.value < randomNum) {
+  } else if (inputGuess.value < randomNum) {
     tooLow(outputHighLow)
-    guessCounter ++;
   } else { 
     tooHigh(outputHighLow);
-    guessCounter ++;
-    }
+  }
 }
 
 function tooLow(outputHighLow){
   outputHighLow.innerText = 'that\'s too low';
+  guessCounter++;
 }
 
 function tooHigh(outputHighLow){
     outputHighLow.innerText = 'that\'s too high';
+    guessCounter ++;
 }
 
 function winner(outputHighLow, inputName){
   outputWinner = inputName.value;
   outputHighLow.innerText = 'BOOM';
+  increaseDifficulty()
   appendCard();
+  guessCounter = 0;
 }
 
 function resetChallengerForm(e){
@@ -139,17 +224,21 @@ function resetChallengerForm(e){
 
 function playGame(e) {
   e.preventDefault();
-  displayNames();
-  // validateInput()
-  checkGuess(inputGuessCh1);
-  checkGuess(inputGuessCh2);
+  if(inputNameCh1.innerText && inputGuessCh1.innerText && inputNameCh2.innerText && inputGuessCh2.innerText == ''){
+    alert('you need to enter Somethin!')
+  } else {
+    displayNames();
+    checkGuess(inputGuessCh1);
+    checkGuess(inputGuessCh2);
+    validateAllInputs();
+  }
 }; 
 
 
 function displayNames(){
-  outputNameCh1.innerText = inputNameCh1.value || 'Challenger 1';
+  outputNameCh1.innerText = inputNameCh1.value || 'Challenger 1 Name';
   outputGuessCh1.innerText = inputGuessCh1.value || '--';
-  outputNameCh2.innerText = inputNameCh2.value || 'Challenger 2';
+  outputNameCh2.innerText = inputNameCh2.value || 'Challenger 2 Name';
   outputGuessCh2.innerText = inputGuessCh2.value || '--';
 }
 
@@ -182,7 +271,6 @@ function appendCard(){
       </div>
     </section>`
       makeRandomNumber();
-      console.log(randomNum);
       clearInterval(timer)
       timer = 0;
 }
@@ -211,4 +299,3 @@ function startClock(){
 
 window.onload = makeRandomNumber();
 window.onload = startClock();
-console.log(randomNum);
