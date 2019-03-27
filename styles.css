@@ -184,7 +184,7 @@ form{
 
 .middle-line{
   border: 1px solid lightgray;
-  height: 140px;
+  height: auto;
   margin-top: -20px;
 }
 
@@ -283,6 +283,11 @@ hr{
     flex-direction: column;
   }
 
+  .latest-guess-challenger1,
+  .latest-guess-challenger2{
+    padding: 5px;
+  }
+
 }
 
 /*---- Large Phones ----------------*/
@@ -310,10 +315,15 @@ hr{
     flex-direction: column;
   }
 
+  .middle-line{
+  display: none;
+  }
+
   .latest-guess-challenger1{
     border-bottom: 1px solid lightgrey;
     margin-bottom: 10px;
   }
+
   #guess-output-high-low2,
   #guess-output-high-low1{
     margin-bottom: 10px;
