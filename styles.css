@@ -1,9 +1,9 @@
 html{
-  min-height: 100%:;
+  min-height: 100%;
+  background-color:#f7f7f7;
 }
 /*---------- Body ------------------*/
 *{
-  /*border: 1px solid red;*/
   box-sizing: border-box;
 }
 
@@ -13,8 +13,10 @@ body{
   margin:0;
   height: 100vh;
 }
+
 main{
   display:flex;
+  height: 100%;
 }
 
 p,
@@ -27,6 +29,7 @@ h4{
 img{
   width:10px;
 }
+
 /*---------- Header ----------------*/
 header{
   background-color:#404041;
@@ -44,7 +47,7 @@ h1 span{
   font-weight:300;
 }
 
-.sub{
+.tagline{
   color:#ffffff;
   text-align:center;
   margin: 0;
@@ -69,6 +72,8 @@ button{
   width: 120px;
   text-transform: uppercase;
   font-weight: 700;
+  outline: none;
+  border: 0;
 }
 
 label{
@@ -79,6 +84,7 @@ label{
 input{
   padding:5px; 
   border: 1px solid lightgrey;
+  margin-right: 10px;
 }
 
 form{
@@ -93,6 +99,9 @@ form{
 .range-flex{
   display: flex;
 }
+.input-range-wrapper{
+  flex: 
+}
 
 .input-range{
   width: 80%
@@ -101,6 +110,7 @@ form{
 #btn-update{
   height: 20px;
   align-self: flex-end;
+  margin-left: auto;
 }
 
 #range-min,
@@ -112,20 +122,21 @@ form{
   display: flex;
 }
 
-/*.name-input-wrapper{
-  display:inline-block;
-}*/
+.name-input-wrapper{
+  width: 100%;
+}
 
 .guess-input-wrapper{
 /*  display: inline-block;*/
-  margin-left: 10px;
+  width: 50%;
 }
 
 .name-input-challengers{
-/*  width: 220px;*/
+ width: 95%;
 }
+
 .guesses-challenger{
-/*  width: 145px;*/
+  width: 100%;
 }
 
 .hidden-error{
@@ -183,7 +194,6 @@ aside{
   display:flex;
   flex-direction:column;
   width:50%;
-
 }
 
 hr{
@@ -244,17 +254,57 @@ hr{
 /*---------- Media Queries ---------*/
 
 /*---- Large Tablet/Small Comp -----*/
-@media screen and (max-width: 1024px){
+/*@media screen and (max-width: 1024px){
 
-}
+}*/
 
 /*---- Typical Tablet Size ---------*/
-@media screen and (max-width: 768px){
+@media screen and (max-width: 820px){
+  .range-flex{
+    display: block;
+  }
+  
+  .input-range{
+    width: 100%;
+  }
+
+  button{
+    margin-top: 10px;
+    width: 100%
+  }
+
+  .btn-wrapper{
+    flex-direction: column;
+  }
 
 }
 
 /*---- Large Phones ----------------*/
-@media screen and (max-width: 440px){
+@media screen and (max-width: 600px){
+  main{
+    display: block;
+    height: 100vh;
+  }
+  
+  article{
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  form{
+    margin: 10px auto;
+  }
+
+  .latest-score{
+    margin: 10px auto;
+  }
+  aside{
+    width: 100%;
+    display: block;
+    min-height: 100px;
+    padding: 10px;
+  }
+
 
 }
 

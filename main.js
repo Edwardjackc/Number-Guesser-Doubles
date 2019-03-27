@@ -101,7 +101,8 @@ function toggleDisabledClear() {
   } else {
     btnClear.setAttribute('enabled')
    }
-  }
+}
+
 
 function validateRange(e){
   var regexCharNum = /[\d\t\n\r]/;
