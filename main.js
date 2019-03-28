@@ -80,6 +80,17 @@ function makeRandomNumber() {
   }
   randomNum = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
   console.log(randomNum)
+};
+
+
+function toggleDisabledBtnUpdate() {
+   if (inputRangeMin && inputRangeMax !='')
+  {
+    btnUpdateRange.removeAttribute('disabled')
+  } else {
+    btnUpdateRange.setAttribute('disabled', 'disabled')
+
+   }
 }
 
 function toggleDisabledBtnSubmit() {
@@ -89,27 +100,27 @@ function toggleDisabledBtnSubmit() {
   } else {
     btnSubmit.setAttribute('disabled', 'disabled')
 
-   }
-}
+  }
 
 function toggleDisabledClear() {
-   if (inputGuessCh1.value || inputGuessCh2.value || inputNameCh1.value || inputNameCh2.value !='')
-  {
+  if (inputNameCh1.value !='' || inputNameCh2.value != '') {
     btnClear.removeAttribute('disabled')
-  } else {
+  }
+  if(inputGuessCh1 != '' || inputGuessCh2.value != '') {
+    btnClear.removeAttribute('disabled')
+  }
+  if (inputGuessCh1 == ''|| inputGuessCh2 =='') {
     btnClear.setAttribute('disabled', 'disabled')
-
-   }
+  }
 }
 
-function toggleDisabledClear() {
-   if (inputGuessCh1.value != '' || inputNameCh2.value != '' || inputGuessCh1.value != '' || inputGuessCh2.value != '')
-  {
-    btnClear.removeAttribute('disabled')
+function validateRange(e) {
+  var regexCharNum = /[\d\t\r]/;
+  if (e.key === 'Backspace' || regexCharNum.test(e.key)){
   } else {
-    btnClear.setAttribute('disabled', 'disabled')
-   }
-}
+    e.preventDefault();
+  }
+};
 
 function validateForAlphaNumeric(e) {
   var regexChar = /[\w\t\n\r]/;
@@ -117,7 +128,7 @@ function validateForAlphaNumeric(e) {
   } else {
     e.preventDefault();
   }
-}
+};
 
 function validateCh1Name(){
   if(inputNameCh1.value == ''){
@@ -127,7 +138,7 @@ function validateCh1Name(){
     inputNameCh1.classList.remove('error');
     errorName1.style.display=  'none';
   }
-}
+};
 
 function validateCh2Name(){
   if(inputNameCh2.value == ''){
@@ -137,7 +148,7 @@ function validateCh2Name(){
     inputNameCh2.classList.remove('error');
     errorName2.style.display = 'none';
   }
-}
+};
 
 function validateCh1Guess(){
   if(inputGuessCh1.value == '' || inputGuessCh1.value == /[\d]/){
@@ -147,7 +158,7 @@ function validateCh1Guess(){
     inputGuessCh1.classList.remove('error');
     errorGuess1.style.display = 'none';
   } 
-}
+};
 
 function validateCh2Guess(){
   if(inputGuessCh2.value == ''){
@@ -157,14 +168,14 @@ function validateCh2Guess(){
     inputGuessCh2.classList.remove('error')
     errorGuess2.style.display = 'none'
   }
-}
+};
 
 function validateAllInputs(){
   validateCh1Guess()
   validateCh2Guess()
   validateCh1Name()
   validateCh2Name()
-}
+};
 
 function validateInputRange(e){
   e.preventDefault();
@@ -181,7 +192,7 @@ function validateInputRange(e){
     errorInputMin.style.display = 'none'
     updateRange();
   }
-}
+};
 
 function updateRange() {
   minNumber = parseInt(inputRangeMin.value) || 1;
@@ -189,12 +200,12 @@ function updateRange() {
   makeRandomNumber();
   changeDOMRange();
   formUpdateRange.reset();
-}
+};
 
 function changeDOMRange(){
   outputRangeMin.innerText = minNumber;
   outputRangeMax.innerText = maxNumber;
-}
+};
 
 function checkGuess(inputGuess) {
   let outputHighLow = outputHighLow1;
@@ -210,17 +221,17 @@ function checkGuess(inputGuess) {
   } else { 
     tooHigh(outputHighLow);
   }
-}
+};
 
 function tooLow(outputHighLow){
   outputHighLow.innerText = 'that\'s too low';
   guessCounter++;
-}
+};
 
 function tooHigh(outputHighLow){
     outputHighLow.innerText = 'that\'s too high';
     guessCounter ++;
-}
+};
 
 function winner(outputHighLow, inputName){
   outputWinner = inputName.value;
@@ -231,9 +242,11 @@ function winner(outputHighLow, inputName){
   btnReset.removeAttribute('disabled')
 }
 
+
 function resetChallengerForm(e){
   e.preventDefault();
   formChallenger.reset();
+  btnClear.setAttribute ('disabled','disabled') 
 };
 
 function resetGame (e){
@@ -273,14 +286,16 @@ function playGame() {
     checkGuess(inputGuessCh1);
     checkGuess(inputGuessCh2);
     validateAllInputs();
+
 } 
+
 
 function displayNames(){
   outputNameCh1.innerText = inputNameCh1.value || 'Challenger 1 Name';
   outputGuessCh1.innerText = inputGuessCh1.value || '--';
   outputNameCh2.innerText = inputNameCh2.value || 'Challenger 2 Name';
   outputGuessCh2.innerText = inputGuessCh2.value || '--';
-}
+};
 
 function appendCard(){
   asideColumn.innerHTML += `<section class="card-winner">
