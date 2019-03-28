@@ -56,14 +56,17 @@ inputRangeMax.addEventListener('keydown', toggleDisabledBtnUpdate)
 inputRangeMax.addEventListener('keydown', validateRange);
 
 inputNameCh1.addEventListener('input', validateCh1Name);
-inputNameCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputNameCh1.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
+inputNameCh1.addEventListener('input', toggleDisabledClear)
 
 inputNameCh2.addEventListener('input', validateCh2Name);
-inputNameCh2.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputNameCh2.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
+inputNameCh2.addEventListener('input', toggleDisabledClear)
 /*---------- Input Guesses -------------*/
 inputGuessCh1.addEventListener('input', validateCh1Guess);
+
 inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
 inputGuessCh1.addEventListener('keyup', toggleDisabledClear)
 inputGuessCh1.addEventListener('keydown', validateRange)
@@ -99,8 +102,10 @@ function toggleDisabledBtnSubmit() {
     btnSubmit.removeAttribute('disabled')
   } else {
     btnSubmit.setAttribute('disabled', 'disabled')
+
   }
 }
+
 
 function toggleDisabledClear() {
   if (inputNameCh1.value !='' || inputNameCh2.value != '') {
@@ -203,6 +208,7 @@ function removeRangeError(){
   errorInputMin.style.display = 'none';
   btnUpdateRange.style['align-self'] = 'flex-end';
 }
+
 function updateRange() {
   minNumber = parseInt(inputRangeMin.value) || 1;
   maxNumber = parseInt(inputRangeMax.value) || 100;
@@ -305,13 +311,13 @@ function removeGuessErrors(){
   errorName2.style.display = 'none';
 }
 
+
 function playGame() {
   displayNames();
   checkGuess(inputGuessCh1);
   checkGuess(inputGuessCh2);
   validateAllInputs();
 } 
-
 
 function displayNames(){
   outputNameCh1.innerText = inputNameCh1.value || 'Challenger 1 Name';
