@@ -51,20 +51,22 @@ btnClear.addEventListener('click', resetChallengerForm);
 btnReset.addEventListener('click', resetGame);
 /*---------- Input Names ---------------*/
 inputNameCh1.addEventListener('input', validateCh1Name);
-inputNameCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputNameCh1.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
+inputNameCh1.addEventListener('input', toggleDisabledClear)
 
 inputNameCh2.addEventListener('input', validateCh2Name);
-inputNameCh2.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputNameCh2.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
+inputNameCh2.addEventListener('input', toggleDisabledClear)
 /*---------- Input Guesses -------------*/
 inputGuessCh1.addEventListener('input', validateCh1Guess);
-inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
-inputGuessCh1.addEventListener('keyup', toggleDisabledClear)
+inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit);
+inputGuessCh1.addEventListener('keyup', toggleDisabledClear);
 
 inputGuessCh2.addEventListener('input', validateCh2Guess);
-inputGuessCh2.addEventListener('keyup', toggleDisabledBtnSubmit)
-inputGuessCh2.addEventListener('keyup', toggleDisabledClear)
+inputGuessCh2.addEventListener('keyup', toggleDisabledBtnSubmit);
+inputGuessCh2.addEventListener('keyup', toggleDisabledClear);
 
 
 asideColumn.addEventListener('click', deleteCard);
@@ -89,9 +91,8 @@ function toggleDisabledBtnUpdate() {
     btnUpdateRange.removeAttribute('disabled')
   } else {
     btnUpdateRange.setAttribute('disabled', 'disabled')
-
-   }
-}
+ }
+};
 
 function toggleDisabledBtnSubmit() {
    if (inputGuessCh1.value && inputGuessCh2.value && inputNameCh1.value && inputNameCh2.value !='')
@@ -99,8 +100,17 @@ function toggleDisabledBtnSubmit() {
     btnSubmit.removeAttribute('disabled')
   } else {
     btnSubmit.setAttribute('disabled', 'disabled')
-
   }
+};
+
+function toggleDisabledBtnClear() {
+   if (inputNameCh1.value && inputNameCh2.value || inputGuessCh1.value && inputGuessCh2 != '')
+  {
+    btnSubmit.removeAttribute('disabled')
+  } else {
+    btnSubmit.setAttribute('disabled', 'disabled')
+  }
+};
 
 function toggleDisabledClear() {
   if (inputNameCh1.value !='' || inputNameCh2.value != '') {
@@ -287,7 +297,7 @@ function playGame() {
     checkGuess(inputGuessCh2);
     validateAllInputs();
 
-} 
+} ;
 
 
 function displayNames(){
