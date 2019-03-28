@@ -49,34 +49,29 @@ btnUpdateRange.addEventListener('click', validateInputRange);
 btnSubmit.addEventListener('click', minMaxGuessValidation);
 btnClear.addEventListener('click', resetChallengerForm);
 btnReset.addEventListener('click', resetGame);
+asideColumn.addEventListener('click', deleteCard);
 /*---------- Input Names ---------------*/
 inputRangeMin.addEventListener('keydown', toggleDisabledBtnUpdate)
 inputRangeMin.addEventListener('keydown', validateRange);
 inputRangeMax.addEventListener('keydown', toggleDisabledBtnUpdate)
 inputRangeMax.addEventListener('keydown', validateRange);
-
 inputNameCh1.addEventListener('input', validateCh1Name);
 inputNameCh1.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
 inputNameCh1.addEventListener('input', toggleDisabledClear)
-
 inputNameCh2.addEventListener('input', validateCh2Name);
 inputNameCh2.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
 inputNameCh2.addEventListener('input', toggleDisabledClear)
 /*---------- Input Guesses -------------*/
 inputGuessCh1.addEventListener('input', validateCh1Guess);
-
 inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
 inputGuessCh1.addEventListener('keyup', toggleDisabledClear)
 inputGuessCh1.addEventListener('keydown', validateRange)
-
 inputGuessCh2.addEventListener('input', validateCh2Guess);
 inputGuessCh2.addEventListener('keyup', toggleDisabledBtnSubmit)
 inputGuessCh2.addEventListener('keyup', toggleDisabledClear)
 inputGuessCh2.addEventListener('keydown', validateRange)
-
-asideColumn.addEventListener('click', deleteCard);
 
 /*---------- Functions -----------------*/
 
