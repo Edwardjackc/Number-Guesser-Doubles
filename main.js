@@ -335,8 +335,8 @@ function appendCard(){
       </div>
       <hr>
       <div class="card-output-results">
-        <h2 class="winner">${outputWinner || 'Challenger'}</h2>
-        <p class="card-style-winner">Winner</p>
+          <h2 class="winner">${outputWinner || 'Challenger'}</h2>
+          <p class="card-style-winner">Winner</p>
       </div>
       <hr>
       <div class="card-bottom-wrapper">
