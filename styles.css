@@ -340,6 +340,13 @@ hr{
     padding: 10px;
   }
 
+  .card-winner{
+    margin: 10px auto;
+  }
+
+  .card-bottom-wrapper{
+    font-size: .8em;
+  }
 
 }
 
