@@ -50,6 +50,11 @@ btnSubmit.addEventListener('click', minMaxGuessValidation);
 btnClear.addEventListener('click', resetChallengerForm);
 btnReset.addEventListener('click', resetGame);
 /*---------- Input Names ---------------*/
+inputRangeMin.addEventListener('keydown', toggleDisabledBtnUpdate)
+inputRangeMin.addEventListener('keydown', validateRange);
+inputRangeMax.addEventListener('keydown', toggleDisabledBtnUpdate)
+inputRangeMax.addEventListener('keydown', validateRange);
+
 inputNameCh1.addEventListener('input', validateCh1Name);
 inputNameCh1.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
@@ -61,20 +66,19 @@ inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
 inputNameCh2.addEventListener('input', toggleDisabledClear)
 /*---------- Input Guesses -------------*/
 inputGuessCh1.addEventListener('input', validateCh1Guess);
-inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit);
-inputGuessCh1.addEventListener('keyup', toggleDisabledClear);
+
+inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputGuessCh1.addEventListener('keyup', toggleDisabledClear)
+inputGuessCh1.addEventListener('keydown', validateRange)
 
 inputGuessCh2.addEventListener('input', validateCh2Guess);
-inputGuessCh2.addEventListener('keyup', toggleDisabledBtnSubmit);
-inputGuessCh2.addEventListener('keyup', toggleDisabledClear);
-
+inputGuessCh2.addEventListener('keyup', toggleDisabledBtnSubmit)
+inputGuessCh2.addEventListener('keyup', toggleDisabledClear)
+inputGuessCh2.addEventListener('keydown', validateRange)
 
 asideColumn.addEventListener('click', deleteCard);
 
 /*---------- Functions -----------------*/
-
-
-
 
 function makeRandomNumber() {
     if(minNumber<=0){
@@ -86,31 +90,22 @@ function makeRandomNumber() {
 
 
 function toggleDisabledBtnUpdate() {
-   if (inputRangeMin && inputRangeMax !='')
-  {
+   if (inputRangeMin && inputRangeMax !='') {
     btnUpdateRange.removeAttribute('disabled')
   } else {
     btnUpdateRange.setAttribute('disabled', 'disabled')
- }
-};
+   }
+}
 
 function toggleDisabledBtnSubmit() {
-   if (inputGuessCh1.value && inputGuessCh2.value && inputNameCh1.value && inputNameCh2.value !='')
-  {
+   if (inputGuessCh1.value && inputGuessCh2.value && inputNameCh1.value && inputNameCh2.value !='') {
     btnSubmit.removeAttribute('disabled')
   } else {
     btnSubmit.setAttribute('disabled', 'disabled')
-  }
-};
 
-function toggleDisabledBtnClear() {
-   if (inputNameCh1.value && inputNameCh2.value || inputGuessCh1.value && inputGuessCh2 != '')
-  {
-    btnSubmit.removeAttribute('disabled')
-  } else {
-    btnSubmit.setAttribute('disabled', 'disabled')
   }
-};
+}
+
 
 function toggleDisabledClear() {
   if (inputNameCh1.value !='' || inputNameCh2.value != '') {
@@ -140,8 +135,8 @@ function validateForAlphaNumeric(e) {
   }
 };
 
-function validateCh1Name(){
-  if(inputNameCh1.value == ''){
+function validateCh1Name() {
+  if(inputNameCh1.value == '') {
     inputNameCh1.classList.add('error')
     errorName1.style.display = 'block';
   } else {
@@ -150,7 +145,7 @@ function validateCh1Name(){
   }
 };
 
-function validateCh2Name(){
+function validateCh2Name() {
   if(inputNameCh2.value == ''){
     inputNameCh2.classList.add('error')
     errorName2.style.display = 'block';
@@ -161,7 +156,7 @@ function validateCh2Name(){
 };
 
 function validateCh1Guess(){
-  if(inputGuessCh1.value == '' || inputGuessCh1.value == /[\d]/){
+  if(inputGuessCh1.value == '') {
     inputGuessCh1.classList.add('error');
     errorGuess1.style.display= 'block';
   } else {
@@ -171,7 +166,7 @@ function validateCh1Guess(){
 };
 
 function validateCh2Guess(){
-  if(inputGuessCh2.value == ''){
+  if(inputGuessCh2.value == '') {
     inputGuessCh2.classList.add('error')
     errorGuess2.style.display = 'block';
   } else {
@@ -190,19 +185,29 @@ function validateAllInputs(){
 function validateInputRange(e){
   e.preventDefault();
   if (inputRangeMin.value > inputRangeMax.value) {
-    inputRangeMin.classList.add('error')
-    inputRangeMax.classList.add('error')
-    errorInputMin.style.display = 'block';
-    errorInputMax.style.display = 'block';
+    addRangeError()
     return
     } else if (inputRangeMin.value < inputRangeMax.value) {
-    inputRangeMax.classList.remove('error')
-    errorInputMax.style.display = 'none';
-    inputRangeMin.classList.remove('error')
-    errorInputMin.style.display = 'none'
+    removeRangeError()
     updateRange();
   }
 };
+
+function addRangeError(){
+  inputRangeMin.classList.add('error');
+  inputRangeMax.classList.add('error');
+  errorInputMin.style.display = 'block';
+  errorInputMax.style.display = 'block';
+  btnUpdateRange.style['align-self'] = 'center';
+}
+
+function removeRangeError(){
+  inputRangeMax.classList.remove('error');
+  errorInputMax.style.display = 'none';
+  inputRangeMin.classList.remove('error');
+  errorInputMin.style.display = 'none';
+  btnUpdateRange.style['align-self'] = 'flex-end';
+}
 
 function updateRange() {
   minNumber = parseInt(inputRangeMin.value) || 1;
@@ -268,44 +273,58 @@ function resetGame (e){
   makeRandomNumber()
   displayNames() 
   btnReset.setAttribute('disabled','disabled')
+  btnClear.setAttribute('disabled','disabled')
+  btnSubmit.setAttribute('disabled','disabled')
 }
 
 function minMaxGuessValidation(e){
   e.preventDefault()
   if(inputGuessCh1.value > maxNumber || inputGuessCh1.value < minNumber) {
-    inputGuessCh1.classList.add('error');
-    inputGuessCh2.classList.add('error');
-    errorGuess1.style.display = 'block';
-    errorGuess2.style.display = 'block';
+    addGuessErrors()
   } else if(inputGuessCh1.value < minNumber || inputGuessCh2.value < minNumber){
-    inputGuessCh1.classList.add('error');
-    inputGuessCh2.classList.add('error');
-    errorGuess1.style.display = 'block';
-    errorGuess2.style.display = 'block';
+    addGuessErrors()
   }else{
-    inputGuessCh1.classList.remove('error');
-    inputGuessCh2.classList.remove('error');
-    errorGuess1.style.display = 'none';
-    errorGuess2.style.display = 'none';
+    removeGuessErrors();
     playGame()
   }
 }
 
+function addGuessErrors(){
+  inputGuessCh1.classList.add('error');
+  inputGuessCh2.classList.add('error');
+  inputNameCh1.classList.add('error');
+  inputNameCh2.classList.add('error');
+  errorGuess1.style.display = 'block';
+  errorGuess2.style.display = 'block';
+  errorName1.style.display = 'block';
+  errorName2.style.display = 'block';
+}
+
+function removeGuessErrors(){
+  inputGuessCh1.classList.remove('error');
+  inputGuessCh2.classList.remove('error');
+  inputNameCh1.classList.remove('error');
+  inputNameCh2.classList.remove('error');
+  errorGuess1.style.display = 'none';
+  errorGuess2.style.display = 'none';
+  errorName1.style.display = 'none';
+  errorName2.style.display = 'none';
+}
+
+
 function playGame() {
-    displayNames();
-    checkGuess(inputGuessCh1);
-    checkGuess(inputGuessCh2);
-    validateAllInputs();
-
-} ;
-
+  displayNames();
+  checkGuess(inputGuessCh1);
+  checkGuess(inputGuessCh2);
+  validateAllInputs();
+} 
 
 function displayNames(){
   outputNameCh1.innerText = inputNameCh1.value || 'Challenger 1 Name';
   outputGuessCh1.innerText = inputGuessCh1.value || '--';
   outputNameCh2.innerText = inputNameCh2.value || 'Challenger 2 Name';
   outputGuessCh2.innerText = inputGuessCh2.value || '--';
-};
+}
 
 function appendCard(){
   asideColumn.innerHTML += `<section class="card-winner">

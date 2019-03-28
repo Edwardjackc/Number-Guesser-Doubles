@@ -76,6 +76,12 @@ button{
   border: 0;
 }
 
+button:hover{
+  background-color: #dd1972; 
+}
+button:hover:disabled{
+  background-color: lightgrey;
+}
 label{
   display:block;
   font-size:.8em;
@@ -103,9 +109,9 @@ form{
 .range-flex{
   display: flex;
 }
-.input-range-wrapper{
+/*.input-range-wrapper{
   flex: 
-}
+}*/
 
 .input-range{
   width: 80%
@@ -126,8 +132,8 @@ form{
   display: flex;
 }
 
-.name-input-wrapper{
-  width: 100%;
+#form-challenger h3{
+  margin-top: 10px;
 }
 
 .guess-input-wrapper{
@@ -139,6 +145,7 @@ form{
  width: 95%;
 }
 
+.name-input-wrapper,
 .guesses-challenger{
   width: 100%;
 }
@@ -309,6 +316,14 @@ hr{
   
   form{
     margin: 10px auto;
+  }
+  .form-challenger-input-wrapper{
+    flex-direction: column;
+  }
+
+  .guess-input-wrapper,
+  .name-input-challengers{
+    width: 100%
   }
 
   .latest-score{
