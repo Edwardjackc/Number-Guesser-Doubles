@@ -27,15 +27,15 @@ var btnHideCard = document.querySelector('.fa-times-circle');
 var asideColumn = document.querySelector('aside');
 var formUpdateRange = document.querySelector('#form-range');
 var formChallenger = document.querySelector('#form-challenger');
-var winnerCard =  document.querySelector('section')
+var winnerCard =  document.querySelector('section');
 
-var error = document.querySelector('.hidden-error')
-var errorName1 = document.querySelector('#name-error-1')
-var errorName2 = document.querySelector('#name-error-2')
-var errorGuess1 = document.querySelector('#guess-error-1')
-var errorGuess2 = document.querySelector('#guess-error-2')
-var errorInputMin = document.querySelector('#range-error-min')
-var errorInputMax = document.querySelector('#range-error-max')
+var error = document.querySelector('.hidden-error');
+var errorName1 = document.querySelector('#name-error-1');
+var errorName2 = document.querySelector('#name-error-2');
+var errorGuess1 = document.querySelector('#guess-error-1');
+var errorGuess2 = document.querySelector('#guess-error-2');
+var errorInputMin = document.querySelector('#range-error-min');
+var errorInputMax = document.querySelector('#range-error-max');
 /*---------- Global Variables ----------*/
 var outputWinner;
 let minNumber = parseInt(inputRangeMin.value) || 1;
@@ -51,27 +51,27 @@ btnClear.addEventListener('click', resetChallengerForm);
 btnReset.addEventListener('click', resetGame);
 asideColumn.addEventListener('click', deleteCard);
 /*---------- Input Names ---------------*/
-inputRangeMin.addEventListener('keydown', toggleDisabledBtnUpdate)
+inputRangeMin.addEventListener('keydown', toggleDisabledBtnUpdate);
 inputRangeMin.addEventListener('keydown', validateRange);
-inputRangeMax.addEventListener('keydown', toggleDisabledBtnUpdate)
+inputRangeMax.addEventListener('keydown', toggleDisabledBtnUpdate);
 inputRangeMax.addEventListener('keydown', validateRange);
 inputNameCh1.addEventListener('input', validateCh1Name);
 inputNameCh1.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh1.addEventListener('keydown', validateForAlphaNumeric);
-inputNameCh1.addEventListener('input', toggleDisabledClear)
+inputNameCh1.addEventListener('input', toggleDisabledClear);
 inputNameCh2.addEventListener('input', validateCh2Name);
 inputNameCh2.addEventListener('keyup', toggleDisabledBtnSubmit);
 inputNameCh2.addEventListener('keydown', validateForAlphaNumeric);
-inputNameCh2.addEventListener('input', toggleDisabledClear)
+inputNameCh2.addEventListener('input', toggleDisabledClear);
 /*---------- Input Guesses -------------*/
 inputGuessCh1.addEventListener('input', validateCh1Guess);
-inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit)
-inputGuessCh1.addEventListener('keyup', toggleDisabledClear)
-inputGuessCh1.addEventListener('keydown', validateRange)
+inputGuessCh1.addEventListener('keyup', toggleDisabledBtnSubmit);
+inputGuessCh1.addEventListener('keyup', toggleDisabledClear);
+inputGuessCh1.addEventListener('keydown', validateRange);
 inputGuessCh2.addEventListener('input', validateCh2Guess);
-inputGuessCh2.addEventListener('keyup', toggleDisabledBtnSubmit)
-inputGuessCh2.addEventListener('keyup', toggleDisabledClear)
-inputGuessCh2.addEventListener('keydown', validateRange)
+inputGuessCh2.addEventListener('keyup', toggleDisabledBtnSubmit);
+inputGuessCh2.addEventListener('keyup', toggleDisabledClear);
+inputGuessCh2.addEventListener('keydown', validateRange);
 
 /*---------- Functions -----------------*/
 
@@ -80,39 +80,39 @@ function makeRandomNumber() {
     minNumber = 1;
   }
   randomNum = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-  console.log(randomNum)
+  console.log(randomNum);
 };
 
 
 function toggleDisabledBtnUpdate() {
    if (inputRangeMin && inputRangeMax !='') {
-    btnUpdateRange.removeAttribute('disabled')
+    btnUpdateRange.removeAttribute('disabled');
   } else {
-    btnUpdateRange.setAttribute('disabled', 'disabled')
+    btnUpdateRange.setAttribute('disabled', 'disabled');
    }
-}
+};
 
 function toggleDisabledBtnSubmit() {
    if (inputGuessCh1.value && inputGuessCh2.value && inputNameCh1.value && inputNameCh2.value !='') {
-    btnSubmit.removeAttribute('disabled')
+    btnSubmit.removeAttribute('disabled');
   } else {
-    btnSubmit.setAttribute('disabled', 'disabled')
+    btnSubmit.setAttribute('disabled', 'disabled');
 
   }
-}
+};
 
 
 function toggleDisabledClear() {
   if (inputNameCh1.value !='' || inputNameCh2.value != '') {
-    btnClear.removeAttribute('disabled')
+    btnClear.removeAttribute('disabled');
   }
   if(inputGuessCh1 != '' || inputGuessCh2.value != '') {
-    btnClear.removeAttribute('disabled')
+    btnClear.removeAttribute('disabled');
   }
   if (inputGuessCh1 == ''|| inputGuessCh2 =='') {
-    btnClear.setAttribute('disabled', 'disabled')
+    btnClear.setAttribute('disabled', 'disabled');
   }
-}
+};
 
 function validateRange(e) {
   var regexCharNum = /[\d\t\r]/;
@@ -142,7 +142,7 @@ function validateCh1Name() {
 
 function validateCh2Name() {
   if(inputNameCh2.value == ''){
-    inputNameCh2.classList.add('error')
+    inputNameCh2.classList.add('error');
     errorName2.style.display = 'block';
   } else {
     inputNameCh2.classList.remove('error');
@@ -160,43 +160,43 @@ function validateCh1Guess(){
   } 
 };
 
-function validateCh2Guess(){
+function validateCh2Guess() {
   if(inputGuessCh2.value == '') {
-    inputGuessCh2.classList.add('error')
+    inputGuessCh2.classList.add('error');
     errorGuess2.style.display = 'block';
   } else {
-    inputGuessCh2.classList.remove('error')
-    errorGuess2.style.display = 'none'
+    inputGuessCh2.classList.remove('error');
+    errorGuess2.style.display = 'none';
   }
 };
 
-function validateAllInputs(){
-  validateCh1Guess()
-  validateCh2Guess()
-  validateCh1Name()
-  validateCh2Name()
+function validateAllInputs() {
+  validateCh1Guess();
+  validateCh2Guess();
+  validateCh1Name();
+  validateCh2Name();
 };
 
-function validateInputRange(e){
+function validateInputRange(e) {
   e.preventDefault();
   if (inputRangeMin.value > inputRangeMax.value) {
-    addRangeError()
-    return
+    addRangeError();
+    return;
     } else if (inputRangeMin.value < inputRangeMax.value) {
-    removeRangeError()
+    removeRangeError();
     updateRange();
   }
 };
 
-function addRangeError(){
+function addRangeError() {
   inputRangeMin.classList.add('error');
   inputRangeMax.classList.add('error');
   errorInputMin.style.display = 'block';
   errorInputMax.style.display = 'block';
   btnUpdateRange.style['align-self'] = 'center';
-}
+};
 
-function removeRangeError(){
+function removeRangeError() {
   inputRangeMax.classList.remove('error');
   errorInputMax.style.display = 'none';
   inputRangeMin.classList.remove('error');
@@ -212,7 +212,7 @@ function updateRange() {
   formUpdateRange.reset();
 };
 
-function changeDOMRange(){
+function changeDOMRange() {
   outputRangeMin.innerText = minNumber;
   outputRangeMax.innerText = maxNumber;
 };
@@ -233,20 +233,20 @@ function checkGuess(inputGuess) {
   }
 };
 
-function tooLow(outputHighLow){
+function tooLow(outputHighLow) {
   outputHighLow.innerText = 'that\'s too low';
   guessCounter++;
 };
 
-function tooHigh(outputHighLow){
+function tooHigh(outputHighLow) {
     outputHighLow.innerText = 'that\'s too high';
     guessCounter ++;
 };
 
-function winner(outputHighLow, inputName){
+function winner(outputHighLow, inputName) {
   outputWinner = inputName.value;
   outputHighLow.innerText = 'BOOM';
-  increaseDifficulty()
+  increaseDifficulty();
   appendCard();
   guessCounter = 0;
   btnReset.removeAttribute('disabled')
@@ -336,7 +336,7 @@ function appendCard(){
       <hr>
       <div class="card-bottom-wrapper">
         <p><span class="card-num-guess">${guessCounter} </span>Guesses</p>
-        <p><span class="card-min">0.${timer}</span>Minutes</p>
+        <p><span class="card-min">${timer}</span> seconds</p>
         <i class="fas fa-times-circle delete"></i>
       </div>
     </section>`
